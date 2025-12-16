@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Civicism Framework - Interactive Pyramid</title>
     <style>
 * {
@@ -390,12 +390,118 @@ canvas {
     color: #2a5298;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
 .control-btn:hover {
     background: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Desktop: Hide menu toggle and menu, show all buttons directly */
+.menu-toggle {
+    display: none;
+}
+
+.focus-menu {
+    display: none;
+}
+
+/* Mobile: Show collapsible menu */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .control-btn.focus-btn {
+        display: none; /* Hide individual focus buttons on mobile - they're in the menu */
+    }
+
+    .control-btn:first-child {
+        display: block; /* Always show Reset View button */
+        width: 100%;
+        margin-bottom: 0.5rem;
+        text-align: left;
+    }
+
+    .menu-toggle {
+        display: flex;
+        background: rgba(42, 82, 152, 0.9);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+        font-weight: 600;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 180px;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .menu-toggle:hover {
+        background: rgba(42, 82, 152, 1);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-toggle::after {
+        content: '▼';
+        font-size: 0.8em;
+        transition: transform 0.3s ease;
+        margin-left: auto;
+    }
+
+    .menu-toggle.active::after {
+        transform: rotate(180deg);
+    }
+
+    .focus-menu {
+        display: none;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .focus-menu.active {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+
+    .focus-menu .control-btn {
+        display: block; /* Show buttons inside menu when active */
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Desktop styles - show all buttons expanded */
+@media (min-width: 769px) {
+    .controls {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
 }
 
 .zoom-controls {
@@ -547,6 +653,182 @@ canvas {
     box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
     border-color: rgba(255, 255, 255, 0.8);
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .info-panel {
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        max-width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        padding: 1rem;
+        padding-top: 3.5rem;
+    }
+
+    .info-panel h2 {
+        font-size: 1.5rem;
+    }
+
+    .info-panel p {
+        font-size: 1rem;
+    }
+
+    .info-panel .close-btn {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.8rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .controls {
+        bottom: 1%;
+        left: 1%;
+        right: 1%;
+    }
+
+    .menu-toggle {
+        width: 100%;
+        min-width: auto;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    .control-btn {
+        padding: 1rem 1.2rem;
+        font-size: 0.9rem;
+        min-height: 44px; /* Minimum touch target size */
+    }
+
+    .focus-menu {
+        max-height: 50vh;
+    }
+
+    .zoom-controls {
+        top: 1%;
+        left: 1%;
+        right: 1%;
+        min-width: auto;
+        width: auto;
+        padding: 0.75rem;
+        max-width: calc(100% - 2%);
+    }
+
+    .zoom-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.8rem;
+    }
+
+    .zoom-slider {
+        height: 8px;
+    }
+
+    .zoom-slider::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+    }
+
+    .zoom-slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+    }
+
+    .network-intelligence-btn,
+    .civicism-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    .domain-network-node,
+    .intersectionality-node {
+        min-height: 44px;
+        padding: 1rem 1.2rem;
+    }
+
+    .layer-label {
+        font-size: clamp(0.9rem, 4vw, 1.5rem);
+    }
+
+    .pyramid-layer.domains .layer-label {
+        font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-toggle {
+        width: 100%;
+    }
+
+    .control-btn {
+        width: 100%;
+    }
+
+    .zoom-controls {
+        padding: 0.5rem;
+    }
+
+    .zoom-indicator {
+        font-size: 0.85rem;
+    }
+
+    .info-panel {
+        padding: 0.75rem;
+        padding-top: 3rem;
+    }
+
+    .info-panel h2 {
+        font-size: 1.3rem;
+    }
+
+    .info-panel p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Touch-friendly hover states */
+@media (hover: none) and (pointer: coarse) {
+    .control-btn:hover,
+    .zoom-btn:hover,
+    .network-intelligence-btn:hover,
+    .civicism-btn:hover,
+    .domain-network-node:hover,
+    .intersectionality-node:hover,
+    .domain-node:hover,
+    .pyramid-layer:hover {
+        transform: none;
+    }
+
+    .control-btn:active,
+    .zoom-btn:active {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+
+    .info-link:hover {
+        transform: none;
+    }
+}
+
+/* Prevent text selection during pan */
+#canvas-container {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Improve touch scrolling in info panel */
+.info-panel {
+    -webkit-overflow-scrolling: touch;
+}
     </style>
 </head>
 <body>
@@ -572,13 +854,25 @@ canvas {
 
     <div class="controls">
         <button class="control-btn" onclick="resetView()">Reset View</button>
-        <button class="control-btn" onclick="zoomToPeople()">Focus: People</button>
-        <button class="control-btn" onclick="zoomToDomains()">Focus: Domains</button>
-        <button class="control-btn" onclick="zoomToGovernance()">Focus: Governance</button>
-        <button class="control-btn" onclick="zoomToEarth()">Focus: Earth</button>
-        <button class="control-btn" onclick="focusOnIntersectionality()">Focus: Identity</button>
-        <button class="control-btn" onclick="focusOnDomainsNetwork()">Focus: Domain Network</button>
-        <button class="control-btn" onclick="focusOnNetworkIntelligence()">Focus: Network Intelligence</button>
+        <!-- Desktop: All buttons shown directly -->
+        <button class="control-btn focus-btn" onclick="zoomToPeople()">Focus: People</button>
+        <button class="control-btn focus-btn" onclick="zoomToDomains()">Focus: Domains</button>
+        <button class="control-btn focus-btn" onclick="zoomToGovernance()">Focus: Governance</button>
+        <button class="control-btn focus-btn" onclick="zoomToEarth()">Focus: Earth</button>
+        <button class="control-btn focus-btn" onclick="focusOnIntersectionality()">Focus: Identity</button>
+        <button class="control-btn focus-btn" onclick="focusOnDomainsNetwork()">Focus: Domain Network</button>
+        <button class="control-btn focus-btn" onclick="focusOnNetworkIntelligence()">Focus: Network Intelligence</button>
+        <!-- Mobile: Collapsible menu -->
+        <button class="menu-toggle" id="focus-menu-toggle" onclick="toggleFocusMenu()">Focus Options</button>
+        <div class="focus-menu" id="focus-menu">
+            <button class="control-btn" onclick="zoomToPeople(); toggleFocusMenu();">Focus: People</button>
+            <button class="control-btn" onclick="zoomToDomains(); toggleFocusMenu();">Focus: Domains</button>
+            <button class="control-btn" onclick="zoomToGovernance(); toggleFocusMenu();">Focus: Governance</button>
+            <button class="control-btn" onclick="zoomToEarth(); toggleFocusMenu();">Focus: Earth</button>
+            <button class="control-btn" onclick="focusOnIntersectionality(); toggleFocusMenu();">Focus: Identity</button>
+            <button class="control-btn" onclick="focusOnDomainsNetwork(); toggleFocusMenu();">Focus: Domain Network</button>
+            <button class="control-btn" onclick="focusOnNetworkIntelligence(); toggleFocusMenu();">Focus: Network Intelligence</button>
+        </div>
     </div>
 
     <div class="info-panel" id="info-panel">
@@ -1909,6 +2203,18 @@ function createPyramidLayers() {
                 relatedLinks: layer.relatedLinks || []
             });
         });
+
+        // Ensure touch events work on mobile
+        layerEl.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            showInfo({
+                title: layer.title,
+                description: layer.description,
+                details: layer.details,
+                relatedLinks: layer.relatedLinks || []
+            });
+        });
         pyramidContainer.appendChild(layerEl);
 
         // Add label
@@ -2328,6 +2634,18 @@ function initializeDomainNetwork() {
             });
         });
 
+        // Ensure touch events work on mobile
+        nodeEl.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            showInfo({
+                title: domain.name,
+                description: domain.description,
+                details: domain.details,
+                relatedLinks: domain.relatedLinks
+            });
+        });
+
         domainNetworkContainer.appendChild(nodeEl);
         domainNetworkNodes.push({
             element: nodeEl,
@@ -2653,6 +2971,20 @@ let lastMouseX = 0;
 let lastMouseY = 0;
 
 container.addEventListener('mousedown', (e) => {
+    // Don't interfere with buttons or interactive elements
+    if (e.target.tagName === 'BUTTON' ||
+        e.target.classList.contains('info-link') ||
+        e.target.closest('.info-panel') ||
+        e.target.closest('.zoom-controls') ||
+        e.target.closest('.controls') ||
+        e.target.closest('.domain-network-node') ||
+        e.target.closest('.intersectionality-node') ||
+        e.target.closest('.network-intelligence-btn') ||
+        e.target.closest('.civicism-btn')) {
+        return;
+    }
+
+    // Allow panning on canvas, container, or pyramid layers
     if (e.target === canvas || e.target === container || e.target.classList.contains('pyramid-layer')) {
         isDragging = true;
         container.classList.add('dragging');
@@ -2700,6 +3032,128 @@ container.addEventListener('wheel', (e) => {
 
     updatePyramidPositions();
 });
+
+// Touch event handlers for mobile
+let touchStartDistance = 0;
+let touchStartScale = 0;
+let touchStartX = 0;
+let touchStartY = 0;
+let lastTouchX = 0;
+let lastTouchY = 0;
+let isPinching = false;
+
+function getTouchDistance(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+function getTouchCenter(touches) {
+    return {
+        x: (touches[0].clientX + touches[1].clientX) / 2,
+        y: (touches[0].clientY + touches[1].clientY) / 2
+    };
+}
+
+container.addEventListener('touchstart', (e) => {
+    // Don't interfere with buttons or interactive elements
+    if (e.target.tagName === 'BUTTON' ||
+        e.target.classList.contains('info-link') ||
+        e.target.closest('.info-panel') ||
+        e.target.closest('.zoom-controls') ||
+        e.target.closest('.controls')) {
+        return;
+    }
+
+    if (e.touches.length === 1) {
+        // Single touch - pan
+        isDragging = true;
+        container.classList.add('dragging');
+        lastTouchX = e.touches[0].clientX;
+        lastTouchY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+        // Two touches - pinch to zoom
+        e.preventDefault();
+        isPinching = true;
+        isDragging = false;
+        touchStartDistance = getTouchDistance(e.touches);
+        touchStartScale = viewState.scale;
+        const center = getTouchCenter(e.touches);
+        touchStartX = center.x;
+        touchStartY = center.y;
+    }
+}, { passive: false });
+
+container.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && isDragging && !isPinching) {
+        // Single touch pan
+        e.preventDefault();
+        const deltaX = e.touches[0].clientX - lastTouchX;
+        const deltaY = e.touches[0].clientY - lastTouchY;
+        viewState.x += deltaX / viewState.scale;
+        viewState.y += deltaY / viewState.scale;
+        lastTouchX = e.touches[0].clientX;
+        lastTouchY = e.touches[0].clientY;
+        updatePyramidPositions();
+    } else if (e.touches.length === 2 && isPinching) {
+        // Pinch to zoom
+        e.preventDefault();
+        const currentDistance = getTouchDistance(e.touches);
+        const scaleRatio = currentDistance / touchStartDistance;
+        const newScale = Math.max(
+            viewState.minScale,
+            Math.min(viewState.maxScale, touchStartScale * scaleRatio)
+        );
+
+        const center = getTouchCenter(e.touches);
+        const worldX = (center.x - window.innerWidth / 2) / touchStartScale - viewState.x;
+        const worldY = (center.y - window.innerHeight / 2) / touchStartScale - viewState.y;
+
+        viewState.scale = newScale;
+        viewState.x = (center.x - window.innerWidth / 2) / viewState.scale - worldX;
+        viewState.y = (center.y - window.innerHeight / 2) / viewState.scale - worldY;
+
+        updatePyramidPositions();
+    }
+}, { passive: false });
+
+container.addEventListener('touchend', (e) => {
+    if (e.touches.length === 0) {
+        // All touches ended
+        isDragging = false;
+        isPinching = false;
+        container.classList.remove('dragging');
+    } else if (e.touches.length === 1) {
+        // One touch remaining - switch to pan mode
+        isPinching = false;
+        isDragging = true;
+        lastTouchX = e.touches[0].clientX;
+        lastTouchY = e.touches[0].clientY;
+    }
+});
+
+container.addEventListener('touchcancel', () => {
+    isDragging = false;
+    isPinching = false;
+    container.classList.remove('dragging');
+});
+
+// Prevent double-tap zoom on mobile (only on canvas/container, not interactive elements)
+let lastTap = 0;
+container.addEventListener('touchend', (e) => {
+    // Only prevent if tapping on canvas/container itself, not buttons or interactive elements
+    if (e.target === canvas || e.target === container || e.target.classList.contains('pyramid-layer')) {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 300 && tapLength > 0 && e.touches.length === 0 && !isDragging && !isPinching) {
+            e.preventDefault();
+            // Could add double-tap zoom here if desired
+        }
+        lastTap = currentTime;
+    }
+}, { passive: false });
 
 // Info panel with interactive links
 function showInfo(data) {
@@ -2901,6 +3355,25 @@ function setZoomFromSlider(value) {
 }
 
 // Focus functions
+function toggleFocusMenu() {
+    const menu = document.getElementById('focus-menu');
+    const toggle = document.getElementById('focus-menu-toggle');
+    if (menu && toggle) {
+        menu.classList.toggle('active');
+        toggle.classList.toggle('active');
+    }
+}
+
+// Close focus menu when clicking outside
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('focus-menu');
+    const toggle = document.getElementById('focus-menu-toggle');
+    if (menu && toggle && !menu.contains(e.target) && !toggle.contains(e.target)) {
+        menu.classList.remove('active');
+        toggle.classList.remove('active');
+    }
+});
+
 function resetView() {
     viewState.x = 0;
     viewState.y = 0;
