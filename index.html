@@ -49,6 +49,49 @@ canvas {
     z-index: 110;
 }
 
+#vortical-progression-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 120;
+}
+
+#vortical-progression-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+    z-index: 121;
+    cursor: pointer;
+}
+
+.vortical-phase-node {
+    position: absolute;
+    border-radius: 50%;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    padding: 0.5rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.vortical-phase-node:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
 #intersectionality-container {
     position: absolute;
     top: 0;
@@ -654,6 +697,30 @@ canvas {
     border-color: rgba(255, 255, 255, 0.8);
 }
 
+.vortical-progression-btn {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.9) 0%, rgba(255, 69, 0, 0.9) 100%);
+    border: 2px solid rgba(255, 140, 0, 1);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    z-index: 150;
+    pointer-events: auto;
+    white-space: nowrap;
+}
+
+.vortical-progression-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 1) 0%, rgba(255, 69, 0, 1) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .info-panel {
@@ -836,11 +903,14 @@ canvas {
         <canvas id="main-canvas"></canvas>
         <canvas id="domain-network-canvas"></canvas>
         <canvas id="intersectionality-canvas"></canvas>
+        <canvas id="vortical-progression-canvas"></canvas>
         <div id="pyramid-container"></div>
         <div id="domain-network-container"></div>
         <div id="intersectionality-container"></div>
+        <div id="vortical-progression-container"></div>
         <button id="network-intelligence-btn" class="network-intelligence-btn">Network Intelligence</button>
         <button id="civicism-btn" class="civicism-btn">Civicism</button>
+        <button id="vortical-progression-btn" class="vortical-progression-btn">Vortical Progression</button>
     </div>
 
     <div class="zoom-controls">
@@ -862,6 +932,7 @@ canvas {
         <button class="control-btn focus-btn" onclick="focusOnIntersectionality()">Focus: Identity</button>
         <button class="control-btn focus-btn" onclick="focusOnDomainsNetwork()">Focus: Domain Network</button>
         <button class="control-btn focus-btn" onclick="focusOnNetworkIntelligence()">Focus: Network Intelligence</button>
+        <button class="control-btn focus-btn" onclick="focusOnVorticalProgression()">Focus: Vortical Progression</button>
         <!-- Mobile: Collapsible menu -->
         <button class="menu-toggle" id="focus-menu-toggle" onclick="toggleFocusMenu()">Focus Options</button>
         <div class="focus-menu" id="focus-menu">
@@ -872,6 +943,7 @@ canvas {
             <button class="control-btn" onclick="focusOnIntersectionality(); toggleFocusMenu();">Focus: Identity</button>
             <button class="control-btn" onclick="focusOnDomainsNetwork(); toggleFocusMenu();">Focus: Domain Network</button>
             <button class="control-btn" onclick="focusOnNetworkIntelligence(); toggleFocusMenu();">Focus: Network Intelligence</button>
+            <button class="control-btn" onclick="focusOnVorticalProgression(); toggleFocusMenu();">Focus: Vortical Progression</button>
         </div>
     </div>
 
@@ -2107,16 +2179,68 @@ const intersectionalitySections = {
     }
 };
 
+// Vortical Progression data
+const vorticalPhases = [
+    {
+        name: 'Religion',
+        description: 'First large-scale organizing principles, creating meaning systems that could coordinate behavior across vast populations.',
+        details: `<h3>Religion Phase</h3>
+        <p>Religion gave humanity its first large-scale organizing principles, creating meaning systems that could coordinate behavior across vast populations. Religious frameworks established concepts of universal human dignity, moral obligations to others, and recognition that humans need purpose beyond immediate material concerns.</p>
+        <p>However, when divine authority became rigid dogma disconnected from evolving human understanding, societies needed new organizing principles.</p>`,
+        color: 'rgba(255, 215, 0, 0.9)',
+        position: 0 // First phase
+    },
+    {
+        name: 'Economic Systems',
+        description: 'Emergence of systems to address material realities - capitalism and communism responding to resource organization.',
+        details: `<h3>Economic Systems Phase</h3>
+        <p>Economic systems emerged to address the material realities that religious authority alone couldn't manage. Capitalism harnessed individual self-interest to drive innovation and resource allocation, while communism responded to capitalism's inequalities by emphasizing collective ownership and worker solidarity.</p>
+        <p>Both systems recognized that material organization matters profoundly for human welfare, yet both also became quasi-religious in their devotion to abstract principles rather than concrete human prosperity.</p>`,
+        color: 'rgba(255, 140, 0, 0.9)',
+        position: 1
+    },
+    {
+        name: 'Enlightenment Reason',
+        description: 'Systematizing human understanding through rational analysis, scientific method, and evidence-based thinking.',
+        details: `<h3>Enlightenment Reason Phase</h3>
+        <p>Enlightenment Reason emerged to systematize human understanding through rational analysis, scientific method, and evidence-based thinking. This intellectual foundation revolutionized human capability and provided the conceptual tools for organizing society around logic rather than tradition or divine authority.</p>
+        <p>The Enlightenment largely overlapped with mercantilism in the West, where government-sanctioned trading companies accumulated power and resources, creating the foundation for what would become capitalism.</p>`,
+        color: 'rgba(0, 191, 255, 0.9)',
+        position: 2
+    },
+    {
+        name: 'Individualism',
+        description: 'Emphasis on individual rights, personal autonomy, and self-determination as wealth and power became more distributed.',
+        details: `<h3>Individualism Phase</h3>
+        <p>Individualism emerged as wealth and power became more distributed, emphasizing individual rights, personal autonomy, and self-determination. This created unprecedented opportunities for human expression and achievement.</p>
+        <p>Yet individualism taken to extremes creates collective problems that individual action alone cannot solve, from climate change to inequality to complex technological risks.</p>`,
+        color: 'rgba(50, 205, 50, 0.9)',
+        position: 3
+    },
+    {
+        name: 'Civicism',
+        description: 'Synthesis of all previous insights, using intelligent systems to optimize for collective human prosperity while maintaining individual freedom.',
+        details: `<h3>Civicism Phase</h3>
+        <p>Civicism now emerges as the synthesis of all these insights, grounded in intersectional understanding of how people actually exist in society. From religion, it takes the recognition that humans need meaning and purpose beyond material accumulation. From economic systems, it incorporates sophisticated understanding of how material organization affects human welfare. From the Enlightenment, it embraces rational analysis and evidence-based decision-making. From individualism, it preserves respect for personal agency and individual rights.</p>
+        <p>But it transcends each by using intelligent systems to manage the complexity of optimizing for collective human prosperity while maintaining individual freedom - all while recognizing that people exist at multiple intersections simultaneously.</p>`,
+        color: 'rgba(138, 43, 226, 0.9)',
+        position: 4
+    }
+];
+
 const canvas = document.getElementById('main-canvas');
 const ctx = canvas.getContext('2d');
 const domainNetworkCanvas = document.getElementById('domain-network-canvas');
 const domainNetworkCtx = domainNetworkCanvas.getContext('2d');
 const intersectionalityCanvas = document.getElementById('intersectionality-canvas');
 const intersectionalityCtx = intersectionalityCanvas.getContext('2d');
+const vorticalProgressionCanvas = document.getElementById('vortical-progression-canvas');
+const vorticalProgressionCtx = vorticalProgressionCanvas.getContext('2d');
 const container = document.getElementById('canvas-container');
 const pyramidContainer = document.getElementById('pyramid-container');
 const domainNetworkContainer = document.getElementById('domain-network-container');
 const intersectionalityContainer = document.getElementById('intersectionality-container');
+const vorticalProgressionContainer = document.getElementById('vortical-progression-container');
 const infoPanel = document.getElementById('info-panel');
 const infoContent = document.getElementById('info-content');
 const zoomIndicator = document.getElementById('zoom-indicator');
@@ -2129,11 +2253,14 @@ function resizeCanvas() {
     domainNetworkCanvas.height = window.innerHeight;
     intersectionalityCanvas.width = window.innerWidth;
     intersectionalityCanvas.height = window.innerHeight;
+    vorticalProgressionCanvas.width = window.innerWidth;
+    vorticalProgressionCanvas.height = window.innerHeight;
     if (typeof pyramidData !== 'undefined') {
         drawNetworkLayer();
         drawDomainNetwork();
     }
     drawIntersectionalityVisualization();
+    drawVorticalProgression();
 }
 window.addEventListener('resize', resizeCanvas);
 
@@ -2361,6 +2488,8 @@ function updatePyramidPositions() {
     updateDomainNetworkPositions();
     updateIntersectionalityPositions();
     drawIntersectionalityVisualization();
+    updateVorticalProgressionPositions();
+    drawVorticalProgression();
     updateZoomIndicator();
 }
 
@@ -2448,7 +2577,24 @@ function drawNetworkLayer() {
     // Position Network Intelligence button FIRST, then draw arrow to it
     updateNetworkIntelligenceButton();
     updateCivicismButton();
+    updateVorticalProgressionButton();
     drawNetworkIntelligenceArrow();
+}
+
+function updateVorticalProgressionButton() {
+    const btn = document.getElementById('vortical-progression-btn');
+    if (!btn) return;
+
+    // Position button above the grid view
+    const offsetX = pyramidBase * 1.1;
+    const offsetY = -pyramidHeight * 0.25; // Above the grid
+
+    const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
+    const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
+
+    btn.style.left = `${screenX}px`;
+    btn.style.top = `${screenY}px`;
+    btn.style.transform = 'translate(-50%, -100%)'; // Center horizontally, align bottom to position
 }
 
 function drawNetworkIntelligenceArrow() {
@@ -2965,6 +3111,234 @@ function updateDomainNetworkPositions() {
     setTimeout(() => drawDomainNetwork(), 0);
 }
 
+// Vortical Progression visualization - 3D animated line
+let vorticalAnimationFrame = 0;
+let vorticalAnimationSpeed = 0.5;
+let vorticalProgressionInitialized = false;
+let animationId = null;
+
+function initializeVorticalProgression() {
+    if (vorticalProgressionInitialized) return;
+    // No DOM nodes needed - just canvas animation
+    vorticalProgressionInitialized = true;
+    animateVorticalProgression();
+}
+
+function animateVorticalProgression() {
+    if (vorticalProgressionInitialized) {
+        vorticalAnimationFrame += vorticalAnimationSpeed;
+        drawVorticalProgression();
+        animationId = requestAnimationFrame(animateVorticalProgression);
+    }
+}
+
+function updateVorticalProgressionPositions() {
+    // No DOM nodes to update - just redraw
+    drawVorticalProgression();
+}
+
+function drawVorticalProgression() {
+    if (!vorticalProgressionCanvas || !vorticalProgressionCtx) return;
+
+    vorticalProgressionCtx.clearRect(0, 0, vorticalProgressionCanvas.width, vorticalProgressionCanvas.height);
+
+    if (!vorticalProgressionInitialized) return;
+
+    // Position to the right of pyramid - small grid view
+    const offsetX = pyramidBase * 1.1;
+    const offsetY = 0;
+    const gridWidth = 350 * viewState.scale;
+    const gridHeight = 350 * viewState.scale;
+
+    const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
+    const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
+
+    // Draw upright squared grid background
+    const gridSpacing = 40 * viewState.scale;
+    vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 0.15)';
+    vorticalProgressionCtx.lineWidth = 1;
+
+    // Grid boundaries (upright rectangle)
+    const gridLeft = screenX - gridWidth / 2;
+    const gridRight = screenX + gridWidth / 2;
+    const gridTop = screenY - gridHeight / 2;
+    const gridBottom = screenY + gridHeight / 2;
+
+    // Main diagonal goes from bottom-left to top-right (for the vortical line)
+    const gridStartX = gridLeft;   // Left
+    const gridStartY = gridBottom; // Bottom
+    const gridEndX = gridRight;    // Right
+    const gridEndY = gridTop;      // Top
+
+    const diagonalAngle = Math.atan2(gridEndY - gridStartY, gridEndX - gridStartX); // Angle of main diagonal
+    const perpAngle = diagonalAngle + Math.PI / 2; // Perpendicular angle for X/Z dimensions
+
+    // Draw vertical grid lines (upright)
+    for (let i = -4; i <= 4; i++) {
+        const x = screenX + i * gridSpacing;
+        vorticalProgressionCtx.beginPath();
+        vorticalProgressionCtx.moveTo(x, gridTop);
+        vorticalProgressionCtx.lineTo(x, gridBottom);
+        vorticalProgressionCtx.stroke();
+    }
+
+    // Draw horizontal grid lines (upright)
+    for (let i = -4; i <= 4; i++) {
+        const y = screenY + i * gridSpacing;
+        vorticalProgressionCtx.beginPath();
+        vorticalProgressionCtx.moveTo(gridLeft, y);
+        vorticalProgressionCtx.lineTo(gridRight, y);
+        vorticalProgressionCtx.stroke();
+    }
+
+    // Draw 3D vortical line - diagonal from left to right
+    // Y is time (along the diagonal), X and Z vary (spatial dimensions)
+    const timeSteps = 300; // Number of points along the spiral
+    const timeRange = vorticalAnimationFrame * 0.01; // Current time position (for animation)
+
+    vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 0.9)';
+    vorticalProgressionCtx.lineWidth = Math.max(2, 3 * viewState.scale);
+
+    // Draw the vortical line diagonally
+    vorticalProgressionCtx.beginPath();
+
+    for (let i = 0; i < timeSteps; i++) {
+        const t = (i / timeSteps) * Math.PI * 6 + timeRange; // Time parameter
+
+        // Position along diagonal (Y = time, going left to right)
+        const progress = i / timeSteps;
+        const diagonalX = gridStartX + (gridEndX - gridStartX) * progress;
+        const diagonalY = gridStartY + (gridEndY - gridStartY) * progress;
+
+        // X and Z vary in a spiral pattern (multiple dimensions)
+        // The spiral expands and contracts to show different states
+        const baseRadius = 15;
+        const expansion = 50 + Math.sin(t * 0.3) * 25; // Varying expansion
+        const radius = baseRadius + progress * expansion;
+        const angle = t * 0.8; // Spiral rotation
+
+        // X dimension (perpendicular to diagonal)
+        const x3d = Math.cos(angle) * radius;
+        // Z dimension (depth - perpendicular to both)
+        const z3d = Math.sin(angle) * radius;
+
+        // Project 3D to 2D (isometric-like projection)
+        // Offset perpendicular to the diagonal
+        const perpX = Math.cos(perpAngle) * x3d;
+        const perpY = Math.sin(perpAngle) * x3d;
+        const depthX = Math.cos(diagonalAngle) * z3d * 0.3;
+        const depthY = Math.sin(diagonalAngle) * z3d * 0.3;
+
+        const projectedX = diagonalX + perpX * viewState.scale + depthX * viewState.scale;
+        const projectedY = diagonalY + perpY * viewState.scale + depthY * viewState.scale;
+
+        if (i === 0) {
+            vorticalProgressionCtx.moveTo(projectedX, projectedY);
+        } else {
+            vorticalProgressionCtx.lineTo(projectedX, projectedY);
+        }
+    }
+
+    vorticalProgressionCtx.stroke();
+
+    // Draw current position indicator (the "now" point)
+    const currentT = ((timeSteps - 1) / timeSteps) * Math.PI * 6 + timeRange;
+    const currentProgress = (timeSteps - 1) / timeSteps;
+    const currentDiagX = gridStartX + (gridEndX - gridStartX) * currentProgress;
+    const currentDiagY = gridStartY + (gridEndY - gridStartY) * currentProgress;
+    const currentExpansion = 50 + Math.sin(currentT * 0.3) * 25;
+    const currentRadius = 15 + currentProgress * currentExpansion;
+    const currentAngle = currentT * 0.8;
+    const currentX3d = Math.cos(currentAngle) * currentRadius;
+    const currentZ3d = Math.sin(currentAngle) * currentRadius;
+    const currentPerpX = Math.cos(perpAngle) * currentX3d;
+    const currentPerpY = Math.sin(perpAngle) * currentX3d;
+    const currentDepthX = Math.cos(diagonalAngle) * currentZ3d * 0.3;
+    const currentDepthY = Math.sin(diagonalAngle) * currentZ3d * 0.3;
+    const currentProjX = currentDiagX + currentPerpX * viewState.scale + currentDepthX * viewState.scale;
+    const currentProjY = currentDiagY + currentPerpY * viewState.scale + currentDepthY * viewState.scale;
+
+    // Draw current position as a glowing point
+    const gradient = vorticalProgressionCtx.createRadialGradient(
+        currentProjX, currentProjY, 0,
+        currentProjX, currentProjY, 8 * viewState.scale
+    );
+    gradient.addColorStop(0, 'rgba(255, 140, 0, 1)');
+    gradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.6)');
+    gradient.addColorStop(1, 'rgba(255, 140, 0, 0)');
+
+    vorticalProgressionCtx.fillStyle = gradient;
+    vorticalProgressionCtx.beginPath();
+    vorticalProgressionCtx.arc(currentProjX, currentProjY, 8 * viewState.scale, 0, Math.PI * 2);
+    vorticalProgressionCtx.fill();
+
+    // Draw solid center point
+    vorticalProgressionCtx.fillStyle = 'rgba(255, 140, 0, 1)';
+    vorticalProgressionCtx.beginPath();
+    vorticalProgressionCtx.arc(currentProjX, currentProjY, 4 * viewState.scale, 0, Math.PI * 2);
+    vorticalProgressionCtx.fill();
+
+    // Draw axis labels
+    const fontSize = Math.max(10, 12 * viewState.scale);
+    vorticalProgressionCtx.fillStyle = 'rgba(255, 140, 0, 0.8)';
+    vorticalProgressionCtx.font = `${fontSize}px sans-serif`;
+    vorticalProgressionCtx.textAlign = 'left';
+    vorticalProgressionCtx.textBaseline = 'bottom';
+
+    // Y axis label (Time) - at the top-right end of the diagonal
+    vorticalProgressionCtx.fillText('Y (Time)', gridEndX + 10 * viewState.scale, gridEndY - 5 * viewState.scale);
+
+    // X axis label - at bottom-left, perpendicular to diagonal
+    const xLabelX = gridStartX + Math.cos(perpAngle) * 35 * viewState.scale;
+    const xLabelY = gridStartY + Math.sin(perpAngle) * 35 * viewState.scale;
+    vorticalProgressionCtx.save();
+    vorticalProgressionCtx.translate(xLabelX, xLabelY);
+    vorticalProgressionCtx.rotate(perpAngle);
+    vorticalProgressionCtx.fillText('X', 0, 0);
+    vorticalProgressionCtx.restore();
+
+    // Z axis label - depth dimension, on the other side
+    const zLabelX = gridStartX - Math.cos(perpAngle) * 35 * viewState.scale;
+    const zLabelY = gridStartY - Math.sin(perpAngle) * 35 * viewState.scale;
+    vorticalProgressionCtx.save();
+    vorticalProgressionCtx.translate(zLabelX, zLabelY);
+    vorticalProgressionCtx.rotate(perpAngle);
+    vorticalProgressionCtx.fillText('Z', 0, 0);
+    vorticalProgressionCtx.restore();
+
+    // Draw description text - below the grid
+    const descFontSize = Math.max(9, 10 * viewState.scale);
+    vorticalProgressionCtx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    vorticalProgressionCtx.font = `${descFontSize}px sans-serif`;
+    vorticalProgressionCtx.textAlign = 'center';
+    vorticalProgressionCtx.textBaseline = 'top';
+
+    const descX = screenX;
+    const descY = gridStartY + 20 * viewState.scale; // Below the bottom of the grid
+    const maxWidth = gridWidth * 0.9;
+
+    // Description text
+    const description = 'Vortical progression through time (Y) and multiple dimensions (X, Z)';
+    const words = description.split(' ');
+    let line = '';
+    let y = descY;
+
+    words.forEach((word) => {
+        const testLine = line + word + ' ';
+        const metrics = vorticalProgressionCtx.measureText(testLine);
+        if (metrics.width > maxWidth && line !== '') {
+            vorticalProgressionCtx.fillText(line, descX, y);
+            line = word + ' ';
+            y += descFontSize + 2;
+        } else {
+            line = testLine;
+        }
+    });
+    if (line !== '') {
+        vorticalProgressionCtx.fillText(line, descX, y);
+    }
+}
+
 // Pan and zoom
 let isDragging = false;
 let lastMouseX = 0;
@@ -2979,8 +3353,10 @@ container.addEventListener('mousedown', (e) => {
         e.target.closest('.controls') ||
         e.target.closest('.domain-network-node') ||
         e.target.closest('.intersectionality-node') ||
+        e.target.closest('.vortical-phase-node') ||
         e.target.closest('.network-intelligence-btn') ||
-        e.target.closest('.civicism-btn')) {
+        e.target.closest('.civicism-btn') ||
+        e.target.closest('.vortical-progression-btn')) {
         return;
     }
 
@@ -3061,7 +3437,9 @@ container.addEventListener('touchstart', (e) => {
         e.target.classList.contains('info-link') ||
         e.target.closest('.info-panel') ||
         e.target.closest('.zoom-controls') ||
-        e.target.closest('.controls')) {
+        e.target.closest('.controls') ||
+        e.target.closest('.vortical-progression-btn') ||
+        e.target.closest('.vortical-phase-node')) {
         return;
     }
 
@@ -3242,6 +3620,10 @@ function handleInfoLink(action, target) {
             focusOnDomainsNetwork();
         } else if (target === 'intersectionality') {
             focusOnIntersectionality();
+        } else if (target === 'vortical-progression') {
+            focusOnVorticalProgression();
+        } else if (target === 'civicism') {
+            showCivicismInfo();
         }
     } else if (action === 'domain') {
         // Focus on domain node
@@ -3553,6 +3935,42 @@ function focusOnDomainsNetwork() {
     animate();
 }
 
+function focusOnVorticalProgression() {
+    // Animate to center the vortical progression in the view
+    // Vortical progression is positioned to the right of the pyramid
+    // To center it, we need to shift the view LEFT (negative X)
+    const targetScale = 0.65;
+    const targetX = -pyramidBase * 0.9; // Shift view left to center the vortical progression
+    const targetY = 0; // Same vertical center as pyramid
+
+    const startX = viewState.x;
+    const startY = viewState.y;
+    const startScale = viewState.scale;
+
+    const duration = 800;
+    const startTime = Date.now();
+
+    function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+
+        viewState.x = startX + (targetX - startX) * ease;
+        viewState.y = startY + (targetY - startY) * ease;
+        viewState.scale = startScale + (targetScale - startScale) * ease;
+
+        updatePyramidPositions();
+        drawIntersectionalityVisualization();
+        drawVorticalProgression();
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    animate();
+}
+
 function animateToLayer(layer, targetScale) {
     const targetX = 0;
     // Center on the layer - pyramid center is at y=0, layers extend upward
@@ -3590,6 +4008,7 @@ createPyramidLayers();
 resizeCanvas();
 initializeDomainNetwork();
 initializeIntersectionalityNetwork();
+initializeVorticalProgression();
 // Set initial view to 35% zoom
 viewState.scale = 0.35;
 updatePyramidPositions();
@@ -3631,6 +4050,51 @@ function setupCivicismButton() {
 // Setup buttons after initial render
 setupNetworkIntelligenceButton();
 setupCivicismButton();
+setupVorticalProgressionButton();
+
+function setupVorticalProgressionButton() {
+    const vorticalBtn = document.getElementById('vortical-progression-btn');
+    if (vorticalBtn) {
+        vorticalBtn.onclick = null;
+        const newBtn = vorticalBtn.cloneNode(true);
+        vorticalBtn.parentNode.replaceChild(newBtn, vorticalBtn);
+
+        newBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            showVorticalProgressionInfo();
+        });
+    }
+}
+
+function showVorticalProgressionInfo() {
+    showInfo({
+        title: 'Vortical Progression',
+        description: 'Vortical progression is how history actually looks when you step back and see the long arc. It\'s a pattern where lots of good and bad things have happened—what counts as good or bad depending on many different factors—but ultimately we\'re still here, and wanting to continue is natural.',
+        details: `<h3>Understanding Vortical Progression</h3>
+        <p>Vortical progression is a pattern of development that is neither linear nor circular, but spiral—a movement that advances forward while recursively returning to similar themes, questions, and challenges at progressively higher levels of complexity and integration.</p>
+
+        <h3>The Pattern</h3>
+        <p>Unlike a simple linear progression that suggests we simply move from one stage to the next, or circular patterns that imply we merely repeat the same cycles, a vortex suggests both forward movement and recursive return. We spiral upward, revisiting similar challenges and themes, but each time with greater sophistication, accumulated wisdom, and more complex tools.</p>
+
+        <h3>The Phases</h3>
+        <p>Human civilization has progressed through distinct phases: <strong>Religion</strong> gave us first large-scale organizing principles. <strong>Economic Systems</strong> emerged to address material realities. <strong>Enlightenment Reason</strong> systematized understanding through rational analysis. <strong>Individualism</strong> emphasized personal rights and autonomy. <strong>Civicism</strong> now emerges as the synthesis of all these insights.</p>
+
+        <h3>Ups and Downs</h3>
+        <p>History shows us that progression isn't smooth. There are periods of great achievement and periods of terrible suffering. There are breakthroughs and collapses, innovations and destructions. What makes something "good" or "bad" depends on many different factors—who you are, where you are, what you value, what you need.</p>
+
+        <h3>Continuity</h3>
+        <p>Despite all the ups and downs, we're still here. Through wars and plagues, through environmental changes and social upheavals, through technological revolutions and cultural transformations, we continue. We adapt, we learn, we reorganize, we find new ways forward even when old ways fail.</p>
+
+        <h3>Wanting to Continue</h3>
+        <p>Wanting to continue is natural. Despite all the difficulties, all the setbacks, all the reasons to give up, there's something in us that wants to keep going, to see what happens next, to build on what came before, to pass something on to what comes after.</p>`,
+        relatedLinks: [
+            { text: 'Civicism', action: 'focus', target: 'civicism' },
+            { text: 'People', action: 'focus', target: 'people' },
+            { text: 'Domains', action: 'focus', target: 'domains' }
+        ]
+    });
+}
 
 // Setup intersectionality visualization click handler
 if (intersectionalityContainer) {
@@ -3687,6 +4151,8 @@ document.addEventListener('click', (e) => {
         !e.target.classList.contains('domain-network-node') &&
         !e.target.classList.contains('network-intelligence-btn') &&
         !e.target.classList.contains('civicism-btn') &&
+        !e.target.classList.contains('vortical-progression-btn') &&
+        !e.target.classList.contains('vortical-phase-node') &&
         !e.target.classList.contains('intersectionality-node') &&
         e.target.id !== 'network-intelligence-btn' &&
         e.target.id !== 'civicism-btn' &&
