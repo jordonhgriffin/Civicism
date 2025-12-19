@@ -919,7 +919,7 @@ canvas {
             <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
             <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">−</button>
         </div>
-        <input type="range" id="zoom-slider" class="zoom-slider" min="85" max="400" value="100" step="5" oninput="setZoomFromSlider(this.value)">
+        <input type="range" id="zoom-slider" class="zoom-slider" min="25" max="400" value="100" step="5" oninput="setZoomFromSlider(this.value)">
     </div>
 
     <div class="controls">
@@ -2269,7 +2269,7 @@ window.addEventListener('resize', resizeCanvas);
             x: 0,
             y: 0,
             scale: 0.35,
-            minScale: 0.2975,
+            minScale: 0.0875,  // 25% zoom (allows much wider view)
             maxScale: 1.4
         };
 
