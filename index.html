@@ -3937,10 +3937,16 @@ function focusOnDomainsNetwork() {
 
 function focusOnVorticalProgression() {
     // Animate to center the vortical progression in the view
-    // Vortical progression is positioned to the right of the pyramid
-    // To center it, we need to shift the view LEFT (negative X)
+    // Vortical progression is positioned at offsetX = pyramidBase * 1.1 (to the right)
+    // To center it on screen, we need:
+    // screenX = (viewState.x + offsetX) * scale + window.innerWidth / 2 = window.innerWidth / 2
+    // So: (viewState.x + offsetX) * scale = 0
+    // Therefore: viewState.x = -offsetX = -pyramidBase * 1.1
+
     const targetScale = 0.65;
-    const targetX = -pyramidBase * 0.9; // Shift view left to center the vortical progression
+    // Calculate target X to center the vortical progression
+    // This works for both desktop and mobile because it's based on world coordinates
+    const targetX = -pyramidBase * 1.1;
     const targetY = 0; // Same vertical center as pyramid
 
     const startX = viewState.x;
@@ -3965,6 +3971,11 @@ function focusOnVorticalProgression() {
 
         if (progress < 1) {
             requestAnimationFrame(animate);
+        } else {
+            // Animation complete - show info panel
+            setTimeout(() => {
+                showVorticalProgressionInfo();
+            }, 100);
         }
     }
 
