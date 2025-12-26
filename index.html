@@ -3153,12 +3153,21 @@ function drawVorticalProgression() {
     const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
     const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
 
-    // Draw upright squared grid background
-    const gridSpacing = 40 * viewState.scale;
-    vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 0.15)';
-    vorticalProgressionCtx.lineWidth = 1;
+    // Draw 3D cube grid background
+    // Calculate maximum extent of vortical line to ensure grid encapsulates it
+    // Make the cube grid even - same size for all dimensions
+    const gridSize = 7; // Same size for X, Y, and Z to make a perfect cube
 
-    // Grid boundaries (upright rectangle)
+    // Scale factors for each dimension - use same scale for perfect cube
+    const cubeScale = Math.min(gridWidth, gridHeight) / (gridSize * 2.5);
+    const scaleX = cubeScale;
+    const scaleY = cubeScale;
+    const scaleZ = cubeScale;
+
+    vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 0.2)';
+    vorticalProgressionCtx.lineWidth = Math.max(0.5, 1 * viewState.scale);
+
+    // Grid boundaries (upright rectangle for the front face)
     const gridLeft = screenX - gridWidth / 2;
     const gridRight = screenX + gridWidth / 2;
     const gridTop = screenY - gridHeight / 2;
@@ -3173,69 +3182,97 @@ function drawVorticalProgression() {
     const diagonalAngle = Math.atan2(gridEndY - gridStartY, gridEndX - gridStartX); // Angle of main diagonal
     const perpAngle = diagonalAngle + Math.PI / 2; // Perpendicular angle for X/Z dimensions
 
-    // Draw vertical grid lines (upright)
-    for (let i = -4; i <= 4; i++) {
-        const x = screenX + i * gridSpacing;
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(x, gridTop);
-        vorticalProgressionCtx.lineTo(x, gridBottom);
-        vorticalProgressionCtx.stroke();
+    // Standard isometric projection parameters
+    // Isometric view: 30 degrees rotation, equal foreshortening
+    const isoAngle = Math.PI / 6; // 30 degrees
+
+    // Helper function to project 3D point to 2D (standard isometric)
+    // x3d: X axis (height), y3d: Y axis (longer width/time), z3d: Z axis (other width)
+    function project3D(x3d, y3d, z3d) {
+        // Standard isometric projection formula with different scales for each dimension
+        // x' = (x - z) * cos(30°)
+        // y' = y + (x + z) * sin(30°)
+        const isoX = (x3d * scaleX - z3d * scaleZ) * Math.cos(isoAngle);
+        const isoY = y3d * scaleY + (x3d * scaleX + z3d * scaleZ) * Math.sin(isoAngle);
+
+        return {
+            x: screenX + isoX,
+            y: screenY - isoY // Flip Y for screen coordinates
+        };
     }
 
-    // Draw horizontal grid lines (upright)
-    for (let i = -4; i <= 4; i++) {
-        const y = screenY + i * gridSpacing;
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(gridLeft, y);
-        vorticalProgressionCtx.lineTo(gridRight, y);
-        vorticalProgressionCtx.stroke();
+    // Draw grid lines along X axis (height lines, varying Y and Z)
+    // X is the height dimension
+    for (let y = -gridSize; y <= gridSize; y += 1) {
+        for (let z = -gridSize; z <= gridSize; z += 1) {
+            const start = project3D(-gridSize, y, z);
+            const end = project3D(gridSize, y, z);
+            vorticalProgressionCtx.beginPath();
+            vorticalProgressionCtx.moveTo(start.x, start.y);
+            vorticalProgressionCtx.lineTo(end.x, end.y);
+            vorticalProgressionCtx.stroke();
+        }
     }
 
-    // Draw 3D vortical line - diagonal from left to right
-    // Y is time (along the diagonal), X and Z vary (spatial dimensions)
+    // Draw grid lines along Y axis (time lines, varying X and Z)
+    for (let x = -gridSize; x <= gridSize; x += 1) {
+        for (let z = -gridSize; z <= gridSize; z += 1) {
+            const start = project3D(x, -gridSize, z);
+            const end = project3D(x, gridSize, z);
+            vorticalProgressionCtx.beginPath();
+            vorticalProgressionCtx.moveTo(start.x, start.y);
+            vorticalProgressionCtx.lineTo(end.x, end.y);
+            vorticalProgressionCtx.stroke();
+        }
+    }
+
+    // Draw grid lines along Z axis (depth lines, varying X and Y)
+    for (let x = -gridSize; x <= gridSize; x += 1) {
+        for (let y = -gridSize; y <= gridSize; y += 1) {
+            const start = project3D(x, y, -gridSize);
+            const end = project3D(x, y, gridSize);
+            vorticalProgressionCtx.beginPath();
+            vorticalProgressionCtx.moveTo(start.x, start.y);
+            vorticalProgressionCtx.lineTo(end.x, end.y);
+            vorticalProgressionCtx.stroke();
+        }
+    }
+
+    // Draw 3D vortical line - diagonal from lower-left-back to upper-right-front
     const timeSteps = 300; // Number of points along the spiral
     const timeRange = vorticalAnimationFrame * 0.01; // Current time position (for animation)
 
     vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 0.9)';
     vorticalProgressionCtx.lineWidth = Math.max(2, 3 * viewState.scale);
 
-    // Draw the vortical line diagonally
+    // Draw the vortical line diagonally through the cube
     vorticalProgressionCtx.beginPath();
 
     for (let i = 0; i < timeSteps; i++) {
-        const t = (i / timeSteps) * Math.PI * 6 + timeRange; // Time parameter
+        const t = (i / timeSteps) * Math.PI * 6 + timeRange; // Time parameter for spiral
 
-        // Position along diagonal (Y = time, going left to right)
+        // Progress diagonally: lower-left-back (-gridSize, -gridSize, gridSize) to upper-right-front (gridSize, gridSize, -gridSize)
         const progress = i / timeSteps;
-        const diagonalX = gridStartX + (gridEndX - gridStartX) * progress;
-        const diagonalY = gridStartY + (gridEndY - gridStartY) * progress;
 
-        // X and Z vary in a spiral pattern (multiple dimensions)
-        // The spiral expands and contracts to show different states
-        const baseRadius = 15;
-        const expansion = 50 + Math.sin(t * 0.3) * 25; // Varying expansion
-        const radius = baseRadius + progress * expansion;
-        const angle = t * 0.8; // Spiral rotation
+        // Main diagonal progression
+        const x3d_base = -gridSize + (gridSize * 2) * progress; // X: bottom to top
+        const y3d = -gridSize + (gridSize * 2) * progress; // Y (Time): left to right
+        const z3d_base = gridSize - (gridSize * 2) * progress; // Z: back to front (gridSize to -gridSize)
 
-        // X dimension (perpendicular to diagonal)
-        const x3d = Math.cos(angle) * radius;
-        // Z dimension (depth - perpendicular to both)
-        const z3d = Math.sin(angle) * radius;
+        // Add spiral variation around the main diagonal
+        const spiralRadius = 0.8; // Small spiral around the diagonal
+        const spiralAngle = t * 0.8;
 
-        // Project 3D to 2D (isometric-like projection)
-        // Offset perpendicular to the diagonal
-        const perpX = Math.cos(perpAngle) * x3d;
-        const perpY = Math.sin(perpAngle) * x3d;
-        const depthX = Math.cos(diagonalAngle) * z3d * 0.3;
-        const depthY = Math.sin(diagonalAngle) * z3d * 0.3;
+        const x3d = x3d_base + Math.cos(spiralAngle) * spiralRadius;
+        const z3d = z3d_base + Math.sin(spiralAngle) * spiralRadius;
 
-        const projectedX = diagonalX + perpX * viewState.scale + depthX * viewState.scale;
-        const projectedY = diagonalY + perpY * viewState.scale + depthY * viewState.scale;
+        // Project 3D to 2D using the same projection as the grid
+        const projected = project3D(x3d, y3d, z3d);
 
         if (i === 0) {
-            vorticalProgressionCtx.moveTo(projectedX, projectedY);
+            vorticalProgressionCtx.moveTo(projected.x, projected.y);
         } else {
-            vorticalProgressionCtx.lineTo(projectedX, projectedY);
+            vorticalProgressionCtx.lineTo(projected.x, projected.y);
         }
     }
 
@@ -3244,19 +3281,16 @@ function drawVorticalProgression() {
     // Draw current position indicator (the "now" point)
     const currentT = ((timeSteps - 1) / timeSteps) * Math.PI * 6 + timeRange;
     const currentProgress = (timeSteps - 1) / timeSteps;
-    const currentDiagX = gridStartX + (gridEndX - gridStartX) * currentProgress;
-    const currentDiagY = gridStartY + (gridEndY - gridStartY) * currentProgress;
-    const currentExpansion = 50 + Math.sin(currentT * 0.3) * 25;
-    const currentRadius = 15 + currentProgress * currentExpansion;
-    const currentAngle = currentT * 0.8;
-    const currentX3d = Math.cos(currentAngle) * currentRadius;
-    const currentZ3d = Math.sin(currentAngle) * currentRadius;
-    const currentPerpX = Math.cos(perpAngle) * currentX3d;
-    const currentPerpY = Math.sin(perpAngle) * currentX3d;
-    const currentDepthX = Math.cos(diagonalAngle) * currentZ3d * 0.3;
-    const currentDepthY = Math.sin(diagonalAngle) * currentZ3d * 0.3;
-    const currentProjX = currentDiagX + currentPerpX * viewState.scale + currentDepthX * viewState.scale;
-    const currentProjY = currentDiagY + currentPerpY * viewState.scale + currentDepthY * viewState.scale;
+    const currentX3d_base = -gridSize + (gridSize * 2) * currentProgress;
+    const currentY3d = -gridSize + (gridSize * 2) * currentProgress;
+    const currentZ3d_base = gridSize - (gridSize * 2) * currentProgress;
+    const currentSpiralRadius = 0.8;
+    const currentSpiralAngle = currentT * 0.8;
+    const currentX3d = currentX3d_base + Math.cos(currentSpiralAngle) * currentSpiralRadius;
+    const currentZ3d = currentZ3d_base + Math.sin(currentSpiralAngle) * currentSpiralRadius;
+    const currentProj = project3D(currentX3d, currentY3d, currentZ3d);
+    const currentProjX = currentProj.x;
+    const currentProjY = currentProj.y;
 
     // Draw current position as a glowing point
     const gradient = vorticalProgressionCtx.createRadialGradient(
@@ -3278,65 +3312,59 @@ function drawVorticalProgression() {
     vorticalProgressionCtx.arc(currentProjX, currentProjY, 4 * viewState.scale, 0, Math.PI * 2);
     vorticalProgressionCtx.fill();
 
-    // Draw axis labels
-    const fontSize = Math.max(10, 12 * viewState.scale);
-    vorticalProgressionCtx.fillStyle = 'rgba(255, 140, 0, 0.8)';
-    vorticalProgressionCtx.font = `${fontSize}px sans-serif`;
-    vorticalProgressionCtx.textAlign = 'left';
-    vorticalProgressionCtx.textBaseline = 'bottom';
-
-    // Y axis label (Time) - at the top-right end of the diagonal
-    vorticalProgressionCtx.fillText('Y (Time)', gridEndX + 10 * viewState.scale, gridEndY - 5 * viewState.scale);
-
-    // X axis label - at bottom-left, perpendicular to diagonal
-    const xLabelX = gridStartX + Math.cos(perpAngle) * 35 * viewState.scale;
-    const xLabelY = gridStartY + Math.sin(perpAngle) * 35 * viewState.scale;
-    vorticalProgressionCtx.save();
-    vorticalProgressionCtx.translate(xLabelX, xLabelY);
-    vorticalProgressionCtx.rotate(perpAngle);
-    vorticalProgressionCtx.fillText('X', 0, 0);
-    vorticalProgressionCtx.restore();
-
-    // Z axis label - depth dimension, on the other side
-    const zLabelX = gridStartX - Math.cos(perpAngle) * 35 * viewState.scale;
-    const zLabelY = gridStartY - Math.sin(perpAngle) * 35 * viewState.scale;
-    vorticalProgressionCtx.save();
-    vorticalProgressionCtx.translate(zLabelX, zLabelY);
-    vorticalProgressionCtx.rotate(perpAngle);
-    vorticalProgressionCtx.fillText('Z', 0, 0);
-    vorticalProgressionCtx.restore();
-
-    // Draw description text - below the grid
-    const descFontSize = Math.max(9, 10 * viewState.scale);
-    vorticalProgressionCtx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-    vorticalProgressionCtx.font = `${descFontSize}px sans-serif`;
+    // Draw axis labels with arrows - matching user's sketch
+    const fontSize = Math.max(14, 16 * viewState.scale); // Larger font
+    const arrowSize = 25 * viewState.scale; // Much larger arrows
+    const labelOffset = 60 * viewState.scale;
+    vorticalProgressionCtx.fillStyle = 'rgba(255, 140, 0, 1)'; // Orange
+    vorticalProgressionCtx.strokeStyle = 'rgba(255, 140, 0, 1)'; // Orange
+    vorticalProgressionCtx.lineWidth = Math.max(5, 6 * viewState.scale); // Thicker lines
+    vorticalProgressionCtx.font = `bold ${fontSize}px sans-serif`;
     vorticalProgressionCtx.textAlign = 'center';
-    vorticalProgressionCtx.textBaseline = 'top';
+    vorticalProgressionCtx.textBaseline = 'middle';
 
-    const descX = screenX;
-    const descY = gridStartY + 20 * viewState.scale; // Below the bottom of the grid
-    const maxWidth = gridWidth * 0.9;
-
-    // Description text
-    const description = 'Vortical progression through time (Y) and multiple dimensions (X, Z)';
-    const words = description.split(' ');
-    let line = '';
-    let y = descY;
-
-    words.forEach((word) => {
-        const testLine = line + word + ' ';
-        const metrics = vorticalProgressionCtx.measureText(testLine);
-        if (metrics.width > maxWidth && line !== '') {
-            vorticalProgressionCtx.fillText(line, descX, y);
-            line = word + ' ';
-            y += descFontSize + 2;
-        } else {
-            line = testLine;
-        }
-    });
-    if (line !== '') {
-        vorticalProgressionCtx.fillText(line, descX, y);
+    // Helper function to draw a large arrow
+    function drawArrow(x, y, angle, length) {
+        vorticalProgressionCtx.save();
+        vorticalProgressionCtx.translate(x, y);
+        vorticalProgressionCtx.rotate(angle);
+        // Draw arrow shaft - much thicker
+        vorticalProgressionCtx.beginPath();
+        vorticalProgressionCtx.moveTo(0, 0);
+        vorticalProgressionCtx.lineTo(length, 0);
+        vorticalProgressionCtx.stroke();
+        // Arrowhead - much larger
+        const headSize = arrowSize * 1.2;
+        vorticalProgressionCtx.beginPath();
+        vorticalProgressionCtx.moveTo(length, 0);
+        vorticalProgressionCtx.lineTo(length - headSize, -headSize * 0.6);
+        vorticalProgressionCtx.lineTo(length - headSize, headSize * 0.6);
+        vorticalProgressionCtx.closePath();
+        vorticalProgressionCtx.fill();
+        vorticalProgressionCtx.restore();
     }
+
+    // X axis label - far right side with large upward arrow
+    const xLabelX = screenX + gridWidth * 0.65;
+    const xLabelY = screenY - gridHeight * 0.1; // Move X higher to give Y more space
+    vorticalProgressionCtx.fillText('X', xLabelX, xLabelY);
+    // Large arrow pointing straight up
+    drawArrow(xLabelX, xLabelY - 20 * viewState.scale, -Math.PI / 2, arrowSize * 3);
+
+    // Y axis label (Time) - bottom right, pushed much further right and lower to avoid overlap
+    const yLabelX = screenX + gridWidth * 1.1;
+    const yLabelY = screenY + gridHeight * 0.8;
+    vorticalProgressionCtx.fillText('Y (Time)', yLabelX, yLabelY);
+    // Large arrow pointing diagonally UP and to the RIGHT, starting much further from label to avoid overlap
+    // Arrow starts well below and to the left of the label
+    drawArrow(yLabelX - 150 * viewState.scale, yLabelY + 50 * viewState.scale, -Math.PI / 6, arrowSize * 3.5);
+
+    // Z axis label - bottom left, pushed further left and lower
+    const zLabelX = screenX - gridWidth * 0.75;
+    const zLabelY = screenY + gridHeight * 0.75;
+    vorticalProgressionCtx.fillText('Z', zLabelX, zLabelY);
+    // Large arrow pointing diagonally UP and to the LEFT
+    drawArrow(zLabelX + 80 * viewState.scale, zLabelY + 10 * viewState.scale, -Math.PI + Math.PI / 6, arrowSize * 3.5);
 }
 
 // Pan and zoom
