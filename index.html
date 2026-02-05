@@ -770,6 +770,21 @@ canvas {
     border-color: rgba(255, 255, 255, 0.8);
 }
 
+.motto-container {
+    position: absolute;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#motto-img {
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    transition: width 0.2s ease;
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .info-panel {
@@ -983,6 +998,9 @@ canvas {
         <button id="network-intelligence-btn" class="network-intelligence-btn">Network Intelligence</button>
         <button id="civicism-btn" class="civicism-btn">Civicism</button>
         <button id="vortical-progression-btn" class="vortical-progression-btn">Vortical Progression</button>
+        <div id="motto-container" class="motto-container">
+            <img src="Societas-Melior-Pro-Bono-Omnium.svg" alt="Societas Melior Pro Bono Omnium" id="motto-img">
+        </div>
     </div>
 
     <div class="zoom-controls">
@@ -1029,7 +1047,7 @@ canvas {
     </div>
 
     <!-- Version Display -->
-    <div id="version-display">Version 26.1.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
+    <div id="version-display">Version 26.2.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
 
 
 
@@ -2641,6 +2659,7 @@ function drawNetworkLayer() {
     updateNetworkIntelligenceButton();
     updateCivicismButton();
     updateVorticalProgressionButton();
+    updateMottoPosition();
     drawNetworkIntelligenceArrow();
 }
 
@@ -2771,6 +2790,31 @@ function updateCivicismButton() {
     btn.style.left = `${buttonX}px`;
     btn.style.top = `${buttonY}px`;
     btn.style.transform = 'translate(-50%, -100%)'; // Center horizontally, align bottom to position
+}
+
+function updateMottoPosition() {
+    const btn = document.getElementById('motto-container');
+    if (!btn) return;
+
+    // Position to the right of the Civicism button
+    // Increase offsetX for decent spacing
+    const offsetX = 280;
+    // Align with the top of the zoom area in default view
+    const offsetY = -(pyramidHeight / 2 + 280);
+
+    const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
+    const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
+
+    btn.style.left = `${screenX}px`;
+    btn.style.top = `${screenY}px`;
+    btn.style.transform = 'translate(0, 0)';
+
+    // Scale the image with zoom
+    const img = document.getElementById('motto-img');
+    if (img) {
+        const baseWidth = 550;
+        img.style.width = `${baseWidth * viewState.scale}px`;
+    }
 }
 
 // Domain network visualization
