@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://civicism.jordonhgriffin.com/sitemap.xml
