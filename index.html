@@ -1,4 +1,4 @@
-<!-- v26.3.17.1 — SEO overhaul: title, meta description/keywords, canonical, Open Graph, Twitter card, JSON-LD structured data (WebSite + Article schemas), sitemap.xml, robots.txt -->
+<!-- v26.3.21.1 — Vortical Progression visualization: replaced canvas-based 2D projection with embedded Desmos 3D graph (desmos.com/3d/cxl4ubit68); info panel rewritten to align with Civicism/Vortical-Progression/ documentation (axes, arcs, accumulated floor, neutrality); y/z scale corrected to 0–100 across HTML and markdown -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1063,7 +1063,9 @@ canvas {
         <div id="pyramid-container"></div>
         <div id="domain-network-container"></div>
         <div id="intersectionality-container"></div>
-        <div id="vortical-progression-container"></div>
+        <div id="vortical-progression-container">
+            <iframe id="vortical-desmos-iframe" src="https://www.desmos.com/3d/cxl4ubit68?embed" style="position:absolute;border:none;border-radius:12px;pointer-events:auto;" allowfullscreen></iframe>
+        </div>
         <button id="network-intelligence-btn" class="network-intelligence-btn">Network Intelligence</button>
         <button id="civicism-btn" class="civicism-btn">Civicism</button>
         <button id="vortical-progression-btn" class="vortical-progression-btn">Vortical Progression</button>
@@ -1116,7 +1118,7 @@ canvas {
     </div>
 
     <!-- Version Display -->
-    <div id="version-display">Version 26.3.17.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
+    <div id="version-display">Version 26.3.21.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
 
 
 
@@ -2160,7 +2162,7 @@ const civicismData = {
         <p>The network intelligence that supports Civicism's pyramid structure must therefore be sophisticated enough to recognize and respond to these intersectional realities. Rather than applying one-size-fits-all solutions, the system must understand that effective resource circulation, opportunity creation, and support systems require nuanced approaches that account for how different forms of advantage and disadvantage interact in each person's life.</p>
 
         <h3>The Vortical Progression of Human Organization</h3>
-        <p>Understanding Civicism requires seeing it within the broader historical spiral of human social development. Each phase emerged as a response to the limitations of its predecessor, yet carried forward essential insights that remain valuable.</p>
+        <p>Understanding Civicism requires seeing it within the broader cycle of human social development. Civilization moves in a vortex — not a line, not a closed loop. Each arc of the cycle (The Frontier, The Enclosure, The Settlement, The Grip, The Fracture) starts from the accumulated floor of the last. What gets encoded into The Books during each Enclosure becomes the floor of the next Frontier. The organizing ideologies that have dominated each era are not random — they are the ideologies that won their respective Enclosures.</p>
         <p><strong>Religion</strong> gave humanity its first large-scale organizing principles, creating meaning systems that could coordinate behavior across vast populations. Religious frameworks established concepts of universal human dignity, moral obligations to others, and recognition that humans need purpose beyond immediate material concerns. However, when divine authority became rigid dogma disconnected from evolving human understanding, societies needed new organizing principles.</p>
         <p><strong>Economic Systems</strong> emerged to address the material realities that religious authority alone couldn't manage. Capitalism harnessed individual self-interest to drive innovation and resource allocation, while communism responded to capitalism's inequalities by emphasizing collective ownership and worker solidarity. Both systems recognized that material organization matters profoundly for human welfare, yet both also became quasi-religious in their devotion to abstract principles rather than concrete human prosperity.</p>
         <p><strong>Enlightenment Reason</strong> emerged to systematize human understanding through rational analysis, scientific method, and evidence-based thinking. This intellectual foundation revolutionized human capability and provided the conceptual tools for organizing society around logic rather than tradition or divine authority.</p>
@@ -2350,48 +2352,56 @@ const intersectionalitySections = {
 // Vortical Progression data
 const vorticalPhases = [
     {
-        name: 'Religion',
-        description: 'First large-scale organizing principles, creating meaning systems that could coordinate behavior across vast populations.',
-        details: `<h3>Religion Phase</h3>
-        <p>Religion gave humanity its first large-scale organizing principles, creating meaning systems that could coordinate behavior across vast populations. Religious frameworks established concepts of universal human dignity, moral obligations to others, and recognition that humans need purpose beyond immediate material concerns.</p>
-        <p>However, when divine authority became rigid dogma disconnected from evolving human understanding, societies needed new organizing principles.</p>`,
-        color: 'rgba(225, 169, 94, 0.9)', // Earth Yellow
-        position: 0 // First phase
+        name: 'The Frontier',
+        description: 'Capability high, Governance low. The vacuum of authority opens — chaos and opportunity are the same thing.',
+        details: `<h3>The Frontier</h3>
+        <p>The vacuum of authority opens. New tools exist before any rules govern their use. Those with the capability to act do so without constraint — building, claiming, competing. Chaos and opportunity are the same thing here.</p>
+        <p>The printing press (1450s) before censorship or copyright. The American West (1860s–1890s) unfolding simultaneously with the Industrial Revolution — railroads, steel, and oil with no regulatory framework. The early internet (1990s–2000s): no content law, no data law, no antitrust framework built for networked platforms.</p>
+        <p>In technological eras, Moore's Law functions as an accelerant: computing power roughly doubles every two years, meaning Capability compounds faster than Governance can form. The Frontier phase becomes shorter and more violent. The whole cycle compresses.</p>
+        <p>The Frontier does not announce itself. From the inside, it is experienced as natural meritocracy — effort rewarded, potential limitless.</p>`,
+        color: 'rgba(225, 169, 94, 0.9)',
+        position: 0
     },
     {
-        name: 'Economic Systems',
-        description: 'Emergence of systems to address material realities - capitalism and communism responding to resource organization.',
-        details: `<h3>Economic Systems Phase</h3>
-        <p>Economic systems emerged to address the material realities that religious authority alone couldn't manage. Capitalism harnessed individual self-interest to drive innovation and resource allocation, while communism responded to capitalism's inequalities by emphasizing collective ownership and worker solidarity.</p>
-        <p>Both systems recognized that material organization matters profoundly for human welfare, yet both also became quasi-religious in their devotion to abstract principles rather than concrete human prosperity.</p>`,
-        color: 'rgba(182, 106, 80, 0.9)', // Clay
+        name: 'The Enclosure',
+        description: 'Innovation high, Governance rising — but winner-controlled. The Books get written here.',
+        details: `<h3>The Enclosure</h3>
+        <p>The vacuum begins to close — but from the top. The winners of the Frontier are first to write the rules, and they write them to reflect the landscape they already occupy. Rule Books to enforce the new order. History Books to make it feel inevitable.</p>
+        <p>Rockefeller didn't wait for oil regulation — he wrote the terms of the industry through Standard Oil's contracts and railroad rebates before legislators understood what they were looking at. Big Tech followed the same pattern: Terms of Service, algorithmic governance, and strategic acquisitions became the Rule Books of the digital era long before any government could define the space.</p>
+        <p>The Enclosure is commonly mistaken for the restoration of justice — order after chaos. It is not. It is the conversion of a won position into a permanent one.</p>`,
+        color: 'rgba(182, 106, 80, 0.9)',
         position: 1
     },
     {
-        name: 'Enlightenment Reason',
-        description: 'Systematizing human understanding through rational analysis, scientific method, and evidence-based thinking.',
-        details: `<h3>Enlightenment Reason Phase</h3>
-        <p>Enlightenment Reason emerged to systematize human understanding through rational analysis, scientific method, and evidence-based thinking. This intellectual foundation revolutionized human capability and provided the conceptual tools for organizing society around logic rather than tradition or divine authority.</p>
-        <p>The Enlightenment largely overlapped with mercantilism in the West, where government-sanctioned trading companies accumulated power and resources, creating the foundation for what would become capitalism.</p>`,
-        color: 'rgba(120, 108, 59, 0.9)', // Forest Brown
+        name: 'The Settlement',
+        description: 'Governance dominant, Innovation managed. The framework feels like civilization — not like a choice.',
+        details: `<h3>The Settlement</h3>
+        <p>The order is established. Governance is high; innovation continues but within channels the winners designed. Artificial Scarcity is at maximum. The framework has become intersubjective — collectively constructed, individually experienced as the natural structure of reality. Like time itself.</p>
+        <p>Post-New Deal America (1940s–1960s): regulated capitalism, stable institutions, a middle class built on access structures the New Deal encoded. The Roman Empire at its peak (1st–2nd century AD): roads, law, and currency creating a coordinated world that felt eternal from the inside.</p>
+        <p>Most people inside a Settlement cannot see it as a Settlement. They see civilization.</p>`,
+        color: 'rgba(120, 108, 59, 0.9)',
         position: 2
     },
     {
-        name: 'Individualism',
-        description: 'Emphasis on individual rights, personal autonomy, and self-determination as wealth and power became more distributed.',
-        details: `<h3>Individualism Phase</h3>
-        <p>Individualism emerged as wealth and power became more distributed, emphasizing individual rights, personal autonomy, and self-determination. This created unprecedented opportunities for human expression and achievement.</p>
-        <p>Yet individualism taken to extremes creates collective problems that individual action alone cannot solve, from climate change to inequality to complex technological risks.</p>`,
-        color: 'rgba(213, 130, 88, 0.9)', // Raw Sienna
+        name: 'The Grip',
+        description: 'Governance calcified, Innovation suppressed. The rules exist to maintain position, not to coordinate.',
+        details: `<h3>The Grip</h3>
+        <p>The Settlement becomes brittle. Governance is no longer coordinating — it is preserving. The rules exist to maintain the position of those who wrote them, not to adapt to new conditions. Innovation that threatens the existing order is suppressed, captured, or made too expensive to pursue.</p>
+        <p>The late Roman Empire (3rd–5th century): bureaucratic calcification, currency debasement, military overextension — the machinery of governance consuming more than it produced. The Catholic Church pre-Reformation: controlling access to scripture, suppressing translation, prosecuting heresy — not to protect the faith, but to protect the institution's position as sole interpreter of it.</p>
+        <p>The Grip looks like the Settlement from the inside. The difference is felt, not seen.</p>`,
+        color: 'rgba(99, 81, 71, 0.9)',
         position: 3
     },
     {
-        name: 'Civicism',
-        description: 'Synthesis of all previous insights, using intelligent systems to optimize for collective human prosperity while maintaining individual freedom.',
-        details: `<h3>Civicism Phase</h3>
-        <p>Civicism now emerges as the synthesis of all these insights, grounded in intersectional understanding of how people actually exist in society. From religion, it takes the recognition that humans need meaning and purpose beyond material accumulation. From economic systems, it incorporates sophisticated understanding of how material organization affects human welfare. From the Enlightenment, it embraces rational analysis and evidence-based decision-making. From individualism, it preserves respect for personal agency and individual rights.</p>
-        <p>But it transcends each by using intelligent systems to manage the complexity of optimizing for collective human prosperity while maintaining individual freedom - all while recognizing that people exist at multiple intersections simultaneously.</p>`,
-        color: 'rgba(149, 69, 53, 0.9)', // Chestnut
+        name: 'The Fracture',
+        description: 'Old Governance failing, new Capability emerging. The Books lose authority. What follows is not predetermined.',
+        details: `<h3>The Fracture</h3>
+        <p>The structure cracks. A new technology, an external pressure, or the accumulated weight of The Grip's contradictions begins to break the old order. The Books lose authority — not all at once, but in the places that matter first.</p>
+        <p>The Reformation (1517): Gutenberg's press had been running sixty years, putting scripture and dissent into hands the Church could no longer contain. Luther's 95 Theses spread across Europe in weeks — impossible a generation earlier. The fall of the Soviet Union (1989–1991): the state's information monopoly cracked under economic failure and satellite signals it couldn't jam.</p>
+        <p>The Fracture is not the Frontier returning. The Frontier is an open arc; the Fracture is a collapsing one. It is transitional — unstable, not open.</p>
+        <p><strong>→ New Frontier:</strong> The old order breaks cleanly enough that a new cycle opens. The baseline carries forward what survived — the floor is higher than last time.<br>
+        <strong>→ The Collapse:</strong> Governance and Capability both fall. The Bronze Age Collapse (~1200 BC) erased multiple literate civilizations simultaneously. The fall of Western Rome produced centuries where the baseline dropped rather than rose.</p>`,
+        color: 'rgba(168, 215, 245, 0.9)',
         position: 4
     }
 ];
@@ -3298,288 +3308,33 @@ let animationId = null;
 
 function initializeVorticalProgression() {
     if (vorticalProgressionInitialized) return;
-    // No DOM nodes needed - just canvas animation
     vorticalProgressionInitialized = true;
-    animateVorticalProgression();
-}
-
-function animateVorticalProgression() {
-    if (vorticalProgressionInitialized) {
-        vorticalAnimationFrame += vorticalAnimationSpeed;
-        drawVorticalProgression();
-        animationId = requestAnimationFrame(animateVorticalProgression);
-    }
+    updateVorticalProgressionPositions();
 }
 
 function updateVorticalProgressionPositions() {
-    // No DOM nodes to update - just redraw
-    drawVorticalProgression();
+    const iframe = document.getElementById('vortical-desmos-iframe');
+    if (!iframe) return;
+
+    const offsetX = pyramidBase * 1.1;
+    const offsetY = 0;
+    const worldW = 1100;
+    const worldH = 800;
+
+    const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
+    const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
+    const w = worldW * viewState.scale;
+    const h = worldH * viewState.scale;
+
+    iframe.style.left   = `${screenX - w / 2}px`;
+    iframe.style.top    = `${screenY - h / 2}px`;
+    iframe.style.width  = `${w}px`;
+    iframe.style.height = `${h}px`;
 }
 
 function drawVorticalProgression() {
     if (!vorticalProgressionCanvas || !vorticalProgressionCtx) return;
-
     vorticalProgressionCtx.clearRect(0, 0, vorticalProgressionCanvas.width, vorticalProgressionCanvas.height);
-
-    if (!vorticalProgressionInitialized) return;
-
-    // Position to the right of pyramid - small grid view
-    const offsetX = pyramidBase * 1.1;
-    const offsetY = 0;
-    const gridWidth = 350 * viewState.scale;
-    const gridHeight = 350 * viewState.scale;
-
-    const screenX = (viewState.x + offsetX) * viewState.scale + window.innerWidth / 2;
-    const screenY = (viewState.y + offsetY) * viewState.scale + window.innerHeight / 2;
-
-    // Draw 3D cube grid background
-    // Calculate maximum extent of vortical line to ensure grid encapsulates it
-    // Make the cube grid even - same size for all dimensions
-    const gridSize = 7; // Same size for X, Y, and Z to make a perfect cube
-
-    // Scale factors for each dimension - use same scale for perfect cube
-    const cubeScale = Math.min(gridWidth, gridHeight) / (gridSize * 2.5);
-    const scaleX = cubeScale;
-    const scaleY = cubeScale;
-    const scaleZ = cubeScale;
-
-    vorticalProgressionCtx.strokeStyle = 'rgba(245, 245, 220, 0.6)'; // Sandy Beige (more visible grid)
-    vorticalProgressionCtx.lineWidth = Math.max(0.5, 1 * viewState.scale);
-
-    // Grid boundaries (upright rectangle for the front face)
-    const gridLeft = screenX - gridWidth / 2;
-    const gridRight = screenX + gridWidth / 2;
-    const gridTop = screenY - gridHeight / 2;
-    const gridBottom = screenY + gridHeight / 2;
-
-    // Main diagonal goes from bottom-left to top-right (for the vortical line)
-    const gridStartX = gridLeft;   // Left
-    const gridStartY = gridBottom; // Bottom
-    const gridEndX = gridRight;    // Right
-    const gridEndY = gridTop;      // Top
-
-    const diagonalAngle = Math.atan2(gridEndY - gridStartY, gridEndX - gridStartX); // Angle of main diagonal
-    const perpAngle = diagonalAngle + Math.PI / 2; // Perpendicular angle for X/Z dimensions
-
-    // Standard isometric projection parameters
-    // Isometric view: 30 degrees rotation, equal foreshortening
-    const isoAngle = Math.PI / 6; // 30 degrees
-
-    // Helper function to project 3D point to 2D (standard isometric)
-    // x3d: X axis (height), y3d: Y axis (longer width/time), z3d: Z axis (other width)
-    function project3D(x3d, y3d, z3d) {
-        // Standard isometric projection formula with different scales for each dimension
-        // x' = (x - z) * cos(30°)
-        // y' = y + (x + z) * sin(30°)
-        const isoX = (x3d * scaleX - z3d * scaleZ) * Math.cos(isoAngle);
-        const isoY = y3d * scaleY + (x3d * scaleX + z3d * scaleZ) * Math.sin(isoAngle);
-
-        return {
-            x: screenX + isoX,
-            y: screenY - isoY // Flip Y for screen coordinates
-        };
-    }
-
-    // Draw grid lines along X axis (height lines, varying Y and Z)
-    // X is the height dimension
-    for (let y = -gridSize; y <= gridSize; y += 1) {
-        for (let z = -gridSize; z <= gridSize; z += 1) {
-            const start = project3D(-gridSize, y, z);
-            const end = project3D(gridSize, y, z);
-            vorticalProgressionCtx.beginPath();
-            vorticalProgressionCtx.moveTo(start.x, start.y);
-            vorticalProgressionCtx.lineTo(end.x, end.y);
-            vorticalProgressionCtx.stroke();
-        }
-    }
-
-    // Draw grid lines along Y axis (time lines, varying X and Z)
-    for (let x = -gridSize; x <= gridSize; x += 1) {
-        for (let z = -gridSize; z <= gridSize; z += 1) {
-            const start = project3D(x, -gridSize, z);
-            const end = project3D(x, gridSize, z);
-            vorticalProgressionCtx.beginPath();
-            vorticalProgressionCtx.moveTo(start.x, start.y);
-            vorticalProgressionCtx.lineTo(end.x, end.y);
-            vorticalProgressionCtx.stroke();
-        }
-    }
-
-    // Draw grid lines along Z axis (depth lines, varying X and Y)
-    for (let x = -gridSize; x <= gridSize; x += 1) {
-        for (let y = -gridSize; y <= gridSize; y += 1) {
-            const start = project3D(x, y, -gridSize);
-            const end = project3D(x, y, gridSize);
-            vorticalProgressionCtx.beginPath();
-            vorticalProgressionCtx.moveTo(start.x, start.y);
-            vorticalProgressionCtx.lineTo(end.x, end.y);
-            vorticalProgressionCtx.stroke();
-        }
-    }
-
-    // Draw 3D vortical line - diagonal from lower-left-back to upper-right-front
-    const timeSteps = 300; // Number of points along the spiral
-    const timeRange = vorticalAnimationFrame * 0.01; // Current time position (for animation)
-
-    vorticalProgressionCtx.strokeStyle = 'rgba(168, 215, 245, 1)'; // Taupe
-    vorticalProgressionCtx.lineWidth = Math.max(2.5, 3.5 * viewState.scale); // Slightly thicker
-
-    // Draw the vortical line diagonally through the cube
-    vorticalProgressionCtx.beginPath();
-
-    for (let i = 0; i < timeSteps; i++) {
-        const t = (i / timeSteps) * Math.PI * 6 + timeRange; // Time parameter for spiral
-
-        // Progress diagonally: lower-left-back (-gridSize, -gridSize, gridSize) to upper-right-front (gridSize, gridSize, -gridSize)
-        const progress = i / timeSteps;
-
-        // Main diagonal progression
-        const x3d_base = -gridSize + (gridSize * 2) * progress; // X: bottom to top
-        const y3d = -gridSize + (gridSize * 2) * progress; // Y (Time): left to right
-        const z3d_base = gridSize - (gridSize * 2) * progress; // Z: back to front (gridSize to -gridSize)
-
-        // Add spiral variation around the main diagonal
-        const spiralRadius = 0.8; // Small spiral around the diagonal
-        const spiralAngle = t * 0.8;
-
-        const x3d = x3d_base + Math.cos(spiralAngle) * spiralRadius;
-        const z3d = z3d_base + Math.sin(spiralAngle) * spiralRadius;
-
-        // Project 3D to 2D using the same projection as the grid
-        const projected = project3D(x3d, y3d, z3d);
-
-        if (i === 0) {
-            vorticalProgressionCtx.moveTo(projected.x, projected.y);
-        } else {
-            vorticalProgressionCtx.lineTo(projected.x, projected.y);
-        }
-    }
-
-    vorticalProgressionCtx.stroke();
-
-    // Draw current position indicator (the "now" point)
-    const currentT = ((timeSteps - 1) / timeSteps) * Math.PI * 6 + timeRange;
-    const currentProgress = (timeSteps - 1) / timeSteps;
-    const currentX3d_base = -gridSize + (gridSize * 2) * currentProgress;
-    const currentY3d = -gridSize + (gridSize * 2) * currentProgress;
-    const currentZ3d_base = gridSize - (gridSize * 2) * currentProgress;
-    const currentSpiralRadius = 0.8;
-    const currentSpiralAngle = currentT * 0.8;
-    const currentX3d = currentX3d_base + Math.cos(currentSpiralAngle) * currentSpiralRadius;
-    const currentZ3d = currentZ3d_base + Math.sin(currentSpiralAngle) * currentSpiralRadius;
-    const currentProj = project3D(currentX3d, currentY3d, currentZ3d);
-    const currentProjX = currentProj.x;
-    const currentProjY = currentProj.y;
-
-    // Draw current position as a glowing point
-    const gradient = vorticalProgressionCtx.createRadialGradient(
-        currentProjX, currentProjY, 0,
-        currentProjX, currentProjY, 8 * viewState.scale
-    );
-    gradient.addColorStop(0, 'rgba(168, 215, 245, 1)'); // Taupe
-    gradient.addColorStop(0.5, 'rgba(168, 215, 245, 0.6)');
-    gradient.addColorStop(1, 'rgba(168, 215, 245, 0)');
-
-    vorticalProgressionCtx.fillStyle = gradient;
-    vorticalProgressionCtx.beginPath();
-    vorticalProgressionCtx.arc(currentProjX, currentProjY, 8 * viewState.scale, 0, Math.PI * 2);
-    vorticalProgressionCtx.fill();
-
-    // Draw solid center point
-    vorticalProgressionCtx.fillStyle = 'rgba(204, 119, 34, 1)'; // Ochre
-    vorticalProgressionCtx.beginPath();
-    vorticalProgressionCtx.arc(currentProjX, currentProjY, 4 * viewState.scale, 0, Math.PI * 2);
-    vorticalProgressionCtx.fill();
-
-    // Draw axis labels with arrows - matching user's sketch
-    const fontSize = Math.max(14, 16 * viewState.scale); // Larger font
-    const arrowSize = 25 * viewState.scale; // Much larger arrows
-    const labelOffset = 60 * viewState.scale;
-    vorticalProgressionCtx.fillStyle = 'rgba(168, 215, 245, 1)'; // Taupe
-    vorticalProgressionCtx.strokeStyle = 'rgba(168, 215, 245, 1)'; // Taupe
-    vorticalProgressionCtx.lineWidth = Math.max(5, 6 * viewState.scale); // Thicker lines
-    vorticalProgressionCtx.font = `bold ${fontSize}px sans-serif`;
-    vorticalProgressionCtx.textAlign = 'center';
-    vorticalProgressionCtx.textBaseline = 'middle';
-
-    // Helper function to draw a large arrow with background halo
-    function drawArrow(x, y, angle, length) {
-        vorticalProgressionCtx.save();
-        vorticalProgressionCtx.translate(x, y);
-        vorticalProgressionCtx.rotate(angle);
-
-        // Define arrow properties
-        const headSize = arrowSize * 1.2;
-        const mainLineWidth = Math.max(5, 6 * viewState.scale);
-
-        // --- PASS 1: Background Halo (Masks grid lines) ---
-        vorticalProgressionCtx.lineCap = 'round';
-        vorticalProgressionCtx.lineJoin = 'round';
-        vorticalProgressionCtx.strokeStyle = '#635147'; // Umber background
-        vorticalProgressionCtx.fillStyle = '#635147'; // Umber background
-
-        // Draw Shaft Halo
-        vorticalProgressionCtx.lineWidth = mainLineWidth + 8; // Much thicker for halo
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(0, 0);
-        vorticalProgressionCtx.lineTo(length, 0);
-        vorticalProgressionCtx.stroke();
-
-        // Draw Arrowhead Halo (Stroke around it)
-        vorticalProgressionCtx.lineWidth = 8; // Halo thickness for head
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(length, 0);
-        vorticalProgressionCtx.lineTo(length - headSize, -headSize * 0.6);
-        vorticalProgressionCtx.lineTo(length - headSize, headSize * 0.6);
-        vorticalProgressionCtx.closePath();
-        vorticalProgressionCtx.stroke();
-        vorticalProgressionCtx.fill(); // Fill to obscure grid behind
-
-        // --- PASS 2: Actual Arrow (Taupe) ---
-        vorticalProgressionCtx.strokeStyle = 'rgba(168, 215, 245, 1)'; // Taupe
-        vorticalProgressionCtx.fillStyle = 'rgba(168, 215, 245, 1)'; // Taupe
-        vorticalProgressionCtx.lineWidth = mainLineWidth;
-
-        // Draw Shaft
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(0, 0);
-        vorticalProgressionCtx.lineTo(length, 0);
-        vorticalProgressionCtx.stroke();
-
-        // Draw Arrowhead
-        vorticalProgressionCtx.beginPath();
-        vorticalProgressionCtx.moveTo(length, 0);
-        vorticalProgressionCtx.lineTo(length - headSize, -headSize * 0.6);
-        vorticalProgressionCtx.lineTo(length - headSize, headSize * 0.6);
-        vorticalProgressionCtx.closePath();
-        vorticalProgressionCtx.fill();
-
-        vorticalProgressionCtx.restore();
-    }
-
-    // X axis label - far right side
-    const xLabelX = screenX + gridWidth * 0.9;
-    const xLabelY = screenY - gridHeight * 0.1;
-    vorticalProgressionCtx.fillText('X', xLabelX, xLabelY);
-    // Large arrow pointing straight up - Position BELOW label
-    // Use Math.max to enforce a minimum distance even at low zoom levels
-    drawArrow(xLabelX, xLabelY + Math.max(50, 125 * viewState.scale), -Math.PI / 2, arrowSize * 3);
-
-    // Y axis label (Time) - bottom right
-    const yLabelX = screenX + gridWidth * 1.1;
-    const yLabelY = screenY + gridHeight * 0.8;
-    vorticalProgressionCtx.fillText('Y (Time)', yLabelX, yLabelY);
-    // Large arrow pointing diagonally UP and to the RIGHT - Position LEFT of label
-    // Use Math.max with adjusted values: smaller multiplier for tighter look, minimum 85 for safety
-    drawArrow(yLabelX - Math.max(85, 135 * viewState.scale), yLabelY + 25 * viewState.scale, -Math.PI / 6, arrowSize * 3.5);
-
-    // Z axis label - bottom left
-    const zLabelX = screenX - gridWidth * 0.75;
-    const zLabelY = screenY + gridHeight * 0.75;
-    vorticalProgressionCtx.fillText('Z', zLabelX, zLabelY);
-    // Large arrow pointing diagonally UP and to the LEFT - Position RIGHT of label
-    // Use Math.max to enforce a minimum distance
-    drawArrow(zLabelX + Math.max(60, 160 * viewState.scale), zLabelY + 25 * viewState.scale, -Math.PI + Math.PI / 6, arrowSize * 3.5);
 }
 
 // Pan and zoom
@@ -4324,24 +4079,30 @@ function setupVorticalProgressionButton() {
 function showVorticalProgressionInfo() {
     showInfo({
         title: 'Vortical Progression',
-        description: 'Vortical progression is how history actually looks when you step back and see the long arc. It\'s a pattern where lots of good and bad things have happened—what counts as good or bad depending on many different factors—but ultimately we\'re still here, and wanting to continue is natural.',
-        details: `<h3>Understanding Vortical Progression</h3>
-        <p>Vortical progression is a pattern of development that is neither linear nor circular, but vortical—a movement that advances forward while recursively returning to similar themes, questions, and challenges at progressively higher levels of complexity and integration.</p>
+        description: 'Civilization does not move in a straight line or a closed loop — it moves in a vortex. Each historical cycle results in a shifting baseline. The Rules and technologies of previous winners form the floor for the next frontier.',
+        details: `<h3>The Axes</h3>
+        <ul>
+            <li><strong>X — Time:</strong> The only constant axis. Always forward, never reversible.</li>
+            <li><strong>Y — Capability:</strong> What humans can do. Accumulated tools, technologies, and knowledge at any given moment (scaled 0–100).</li>
+            <li><strong>Z — Governance:</strong> What rules, norms, and structures govern the use of that capability — laws, cultural agreements, enforcement mechanisms, access controls (scaled 0–100).</li>
+        </ul>
+        <p>The relationship between Y and Z at any point in time determines which arc of the cycle civilization is in.</p>
 
-        <h3>The Pattern</h3>
-        <p>Unlike a simple linear progression that suggests we simply move from one stage to the next, or circular patterns that imply we merely repeat the same cycles, a vortex suggests both forward movement and recursive return. We move vortically upward, revisiting similar challenges and themes, but each time with greater sophistication, accumulated wisdom, and more complex tools.</p>
+        <h3>The Arcs</h3>
+        <p><strong>The Frontier</strong> — Y >> Z. The vacuum of authority opens; chaos and opportunity are the same thing.</p>
+        <p><strong>The Enclosure</strong> — Y > Z, governance rising but winner-controlled. The Books get written here: Rule Books to enforce the new order, History Books to make it feel inevitable.</p>
+        <p><strong>The Settlement</strong> — Z ≥ Y, stable. The framework becomes intersubjective — constructed collectively, experienced individually as the natural structure of reality.</p>
+        <p><strong>The Grip</strong> — Z >> Y, governance calcified, capability suppressed. Rules exist to preserve position, not to coordinate.</p>
+        <p><strong>The Fracture</strong> — Old governance failing, new capability emerging. Leads to a New Frontier (constructive) or The Collapse (destructive).</p>
 
-        <h3>The Phases</h3>
-        <p>Human civilization has progressed through distinct phases: <strong>Religion</strong> gave us first large-scale organizing principles. <strong>Economic Systems</strong> emerged to address material realities. <strong>Enlightenment Reason</strong> systematized understanding through rational analysis. <strong>Individualism</strong> emphasized personal rights and autonomy. <strong>Civicism</strong> now emerges as the synthesis of all these insights.</p>
+        <h3>The Accumulated Floor</h3>
+        <p>Civilization does not reset between cycles. Each iteration starts from the floor left by the last — higher or lower depending on what the winners encoded into The Books and whether the Fracture was constructive or destructive.</p>
+        <p>A run of constructive cycles compounds upward. A destructive Fracture subtracts — and if severe enough, can set the next cycle back centuries.</p>
 
-        <h3>Ups and Downs</h3>
-        <p>History shows us that progression isn't smooth. There are periods of great achievement and periods of terrible suffering. There are breakthroughs and collapses, innovations and destructions. What makes something "good" or "bad" depends on many different factors—who you are, where you are, what you value, what you need.</p>
-
-        <h3>Continuity</h3>
-        <p>Despite all the ups and downs, we're still here. Through wars and plagues, through environmental changes and social upheavals, through technological revolutions and cultural transformations, we continue. We adapt, we learn, we reorganize, we find new ways forward even when old ways fail.</p>
-
-        <h3>Wanting to Continue</h3>
-        <p>Wanting to continue is natural. Despite all the difficulties, all the setbacks, all the reasons to give up, there's something in us that wants to keep going, to see what happens next, to build on what came before, to pass something on to what comes after.</p>`,
+        <h3>The Neutrality of the Vortex</h3>
+        <p><strong>Constructive:</strong> Mitigation of environmental trauma, longer lifespans, better ideologies pulled into the baseline.</p>
+        <p><strong>Destructive:</strong> Exploitative ideologies and restrictive rules locked into the baseline, creating a downward pull.</p>
+        <p>The Wild West of tomorrow is always built on top of the Rules written today.</p>`,
         relatedLinks: [
             { text: 'Civicism', action: 'focus', target: 'civicism' },
             { text: 'People', action: 'focus', target: 'people' },
