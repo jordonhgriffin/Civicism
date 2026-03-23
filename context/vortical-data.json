@@ -1,0 +1,2511 @@
+{
+  "segments": [
+    {
+      "t_start": -10000,
+      "t_end": -9950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9950,
+      "t_end": -9900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9900,
+      "t_end": -9850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9850,
+      "t_end": -9800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9800,
+      "t_end": -9750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9750,
+      "t_end": -9700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9700,
+      "t_end": -9650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9650,
+      "t_end": -9600,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -9600,
+      "t_end": -9550,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -9550,
+      "t_end": -9500,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9500,
+      "t_end": -9450,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9450,
+      "t_end": -9400,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9400,
+      "t_end": -9350,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9350,
+      "t_end": -9300,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9300,
+      "t_end": -9250,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9250,
+      "t_end": -9200,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9200,
+      "t_end": -9150,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9150,
+      "t_end": -9100,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9100,
+      "t_end": -9050,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9050,
+      "t_end": -9000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -9000,
+      "t_end": -8950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8950,
+      "t_end": -8900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8900,
+      "t_end": -8850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8850,
+      "t_end": -8800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8800,
+      "t_end": -8750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8750,
+      "t_end": -8700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8700,
+      "t_end": -8650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8650,
+      "t_end": -8600,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8600,
+      "t_end": -8550,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -8550,
+      "t_end": -8500,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -8500,
+      "t_end": -8450,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8450,
+      "t_end": -8400,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8400,
+      "t_end": -8350,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -8350,
+      "t_end": -8300,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -8300,
+      "t_end": -8250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8250,
+      "t_end": -8200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8200,
+      "t_end": -8150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8150,
+      "t_end": -8100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8100,
+      "t_end": -8050,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8050,
+      "t_end": -8000,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -8000,
+      "t_end": -7950,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7950,
+      "t_end": -7900,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7900,
+      "t_end": -7850,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7850,
+      "t_end": -7800,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7800,
+      "t_end": -7750,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7750,
+      "t_end": -7700,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7700,
+      "t_end": -7650,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7650,
+      "t_end": -7600,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7600,
+      "t_end": -7550,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7550,
+      "t_end": -7500,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7500,
+      "t_end": -7450,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7450,
+      "t_end": -7400,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7400,
+      "t_end": -7350,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7350,
+      "t_end": -7300,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7300,
+      "t_end": -7250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7250,
+      "t_end": -7200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7200,
+      "t_end": -7150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7150,
+      "t_end": -7100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7100,
+      "t_end": -7050,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7050,
+      "t_end": -7000,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -7000,
+      "t_end": -6950,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6950,
+      "t_end": -6900,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6900,
+      "t_end": -6850,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6850,
+      "t_end": -6800,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6800,
+      "t_end": -6750,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6750,
+      "t_end": -6700,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6700,
+      "t_end": -6650,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6650,
+      "t_end": -6600,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6600,
+      "t_end": -6550,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6550,
+      "t_end": -6500,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6500,
+      "t_end": -6450,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6450,
+      "t_end": -6400,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6400,
+      "t_end": -6350,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6350,
+      "t_end": -6300,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6300,
+      "t_end": -6250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6250,
+      "t_end": -6200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6200,
+      "t_end": -6150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6150,
+      "t_end": -6100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6100,
+      "t_end": -6050,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6050,
+      "t_end": -6000,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -6000,
+      "t_end": -5950,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5950,
+      "t_end": -5900,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5900,
+      "t_end": -5850,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5850,
+      "t_end": -5800,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5800,
+      "t_end": -5750,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5750,
+      "t_end": -5700,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5700,
+      "t_end": -5650,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5650,
+      "t_end": -5600,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5600,
+      "t_end": -5550,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5550,
+      "t_end": -5500,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -5500,
+      "t_end": -5450,
+      "arc": "Fracture",
+      "color": "#ff6b6b"
+    },
+    {
+      "t_start": -5450,
+      "t_end": -5400,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5400,
+      "t_end": -5350,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5350,
+      "t_end": -5300,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5300,
+      "t_end": -5250,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5250,
+      "t_end": -5200,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5200,
+      "t_end": -5150,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5150,
+      "t_end": -5100,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5100,
+      "t_end": -5050,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5050,
+      "t_end": -5000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -5000,
+      "t_end": -4950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4950,
+      "t_end": -4900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4900,
+      "t_end": -4850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4850,
+      "t_end": -4800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4800,
+      "t_end": -4750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4750,
+      "t_end": -4700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4700,
+      "t_end": -4650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4650,
+      "t_end": -4600,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4600,
+      "t_end": -4550,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4550,
+      "t_end": -4500,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4500,
+      "t_end": -4450,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4450,
+      "t_end": -4400,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4400,
+      "t_end": -4350,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4350,
+      "t_end": -4300,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4300,
+      "t_end": -4250,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4250,
+      "t_end": -4200,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4200,
+      "t_end": -4150,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4150,
+      "t_end": -4100,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4100,
+      "t_end": -4050,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4050,
+      "t_end": -4000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -4000,
+      "t_end": -3950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3950,
+      "t_end": -3900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3900,
+      "t_end": -3850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3850,
+      "t_end": -3800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3800,
+      "t_end": -3750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3750,
+      "t_end": -3700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3700,
+      "t_end": -3650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3650,
+      "t_end": -3600,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3600,
+      "t_end": -3550,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3550,
+      "t_end": -3500,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3500,
+      "t_end": -3450,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3450,
+      "t_end": -3400,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3400,
+      "t_end": -3350,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3350,
+      "t_end": -3300,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3300,
+      "t_end": -3250,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3250,
+      "t_end": -3200,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3200,
+      "t_end": -3150,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3150,
+      "t_end": -3100,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3100,
+      "t_end": -3050,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3050,
+      "t_end": -3000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -3000,
+      "t_end": -2950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2950,
+      "t_end": -2900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2900,
+      "t_end": -2850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2850,
+      "t_end": -2800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2800,
+      "t_end": -2750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2750,
+      "t_end": -2700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2700,
+      "t_end": -2650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": -2650,
+      "t_end": -2600,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": -2600,
+      "t_end": -2550,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2550,
+      "t_end": -2500,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2500,
+      "t_end": -2450,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2450,
+      "t_end": -2400,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2400,
+      "t_end": -2350,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2350,
+      "t_end": -2300,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -2300,
+      "t_end": -2250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2250,
+      "t_end": -2200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2200,
+      "t_end": -2150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2150,
+      "t_end": -2100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2100,
+      "t_end": -2050,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2050,
+      "t_end": -2000,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -2000,
+      "t_end": -1950,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1950,
+      "t_end": -1900,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1900,
+      "t_end": -1850,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1850,
+      "t_end": -1800,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1800,
+      "t_end": -1750,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1750,
+      "t_end": -1700,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1700,
+      "t_end": -1650,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1650,
+      "t_end": -1600,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1600,
+      "t_end": -1550,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1550,
+      "t_end": -1500,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1500,
+      "t_end": -1450,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1450,
+      "t_end": -1400,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1400,
+      "t_end": -1350,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1350,
+      "t_end": -1300,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -1300,
+      "t_end": -1250,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": -1250,
+      "t_end": -1200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1200,
+      "t_end": -1150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1150,
+      "t_end": -1100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1100,
+      "t_end": -1050,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1050,
+      "t_end": -1000,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -1000,
+      "t_end": -950,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -950,
+      "t_end": -900,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -900,
+      "t_end": -850,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -850,
+      "t_end": -800,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -800,
+      "t_end": -750,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -750,
+      "t_end": -700,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -700,
+      "t_end": -650,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -650,
+      "t_end": -600,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -600,
+      "t_end": -550,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -550,
+      "t_end": -500,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -500,
+      "t_end": -450,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -450,
+      "t_end": -400,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -400,
+      "t_end": -350,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -350,
+      "t_end": -300,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -300,
+      "t_end": -250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -250,
+      "t_end": -200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -200,
+      "t_end": -150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -150,
+      "t_end": -100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -100,
+      "t_end": -50,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": -50,
+      "t_end": 0,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 0,
+      "t_end": 50,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 50,
+      "t_end": 100,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 100,
+      "t_end": 150,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 150,
+      "t_end": 200,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 200,
+      "t_end": 250,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 250,
+      "t_end": 300,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 300,
+      "t_end": 350,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 350,
+      "t_end": 400,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 400,
+      "t_end": 450,
+      "arc": "Grip",
+      "color": "#e1a95e"
+    },
+    {
+      "t_start": 450,
+      "t_end": 500,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": 500,
+      "t_end": 550,
+      "arc": "Fracture",
+      "color": "#ff6b6b"
+    },
+    {
+      "t_start": 550,
+      "t_end": 600,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 600,
+      "t_end": 650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 650,
+      "t_end": 700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 700,
+      "t_end": 750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 750,
+      "t_end": 800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 800,
+      "t_end": 850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 850,
+      "t_end": 900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 900,
+      "t_end": 950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 950,
+      "t_end": 1000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1000,
+      "t_end": 1050,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1050,
+      "t_end": 1100,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1100,
+      "t_end": 1150,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1150,
+      "t_end": 1200,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1200,
+      "t_end": 1250,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1250,
+      "t_end": 1300,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1300,
+      "t_end": 1350,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": 1350,
+      "t_end": 1400,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": 1400,
+      "t_end": 1450,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": 1450,
+      "t_end": 1500,
+      "arc": "Settlement",
+      "color": "#7ef5b8"
+    },
+    {
+      "t_start": 1500,
+      "t_end": 1550,
+      "arc": "Enclosure",
+      "color": "#9b7ef5"
+    },
+    {
+      "t_start": 1550,
+      "t_end": 1600,
+      "arc": "Fracture",
+      "color": "#ff6b6b"
+    },
+    {
+      "t_start": 1600,
+      "t_end": 1650,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1650,
+      "t_end": 1700,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1700,
+      "t_end": 1750,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1750,
+      "t_end": 1800,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1800,
+      "t_end": 1850,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1850,
+      "t_end": 1900,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1900,
+      "t_end": 1950,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 1950,
+      "t_end": 2000,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    },
+    {
+      "t_start": 2000,
+      "t_end": 2026,
+      "arc": "Frontier",
+      "color": "#7eb8f5"
+    }
+  ],
+  "events": [
+    {
+      "name": "Agriculture begins",
+      "t": -9500,
+      "x": -9.5,
+      "y": 3.8209939715004975,
+      "z": 3.005786262900688,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 0
+    },
+    {
+      "name": "First cave paintings",
+      "t": -8000,
+      "x": -8,
+      "y": 0.9518108886642264,
+      "z": 3.8275899361677745,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 1
+    },
+    {
+      "name": "Çatalhöyük settled",
+      "t": -7500,
+      "x": -7.5,
+      "y": 2.1790135001691326,
+      "z": 5.766030653482105,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 2
+    },
+    {
+      "name": "Bronze Age begins",
+      "t": -3300,
+      "x": -3.3000000000000003,
+      "y": 5.45968232484108,
+      "z": 1.8336671180939197,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 3
+    },
+    {
+      "name": "First writing",
+      "t": -3400,
+      "x": -3.4,
+      "y": 5.849767975872676,
+      "z": 2.6102491514980533,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 4
+    },
+    {
+      "name": "Unification of Egypt",
+      "t": -3100,
+      "x": -3.1,
+      "y": 4.355502797295596,
+      "z": 1.9500125792018066,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 5
+    },
+    {
+      "name": "Great Pyramid built",
+      "t": -2560,
+      "x": -2.56,
+      "y": 2.312619263592531,
+      "z": 2.553294322455009,
+      "arc": "Settlement",
+      "color": "#7ef5b8",
+      "level": 0,
+      "index": 6
+    },
+    {
+      "name": "Indus Valley Civilization peak",
+      "t": -2500,
+      "x": -2.5,
+      "y": 2.467059567972181,
+      "z": 2.8503315219991765,
+      "arc": "Settlement",
+      "color": "#7ef5b8",
+      "level": 0,
+      "index": 7
+    },
+    {
+      "name": "Code of Hammurabi",
+      "t": -1754,
+      "x": -1.754,
+      "y": 3.1068570953581727,
+      "z": 4.488669912555522,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 8
+    },
+    {
+      "name": "Shang Dynasty begins",
+      "t": -1600,
+      "x": -1.6,
+      "y": 3.111359537732042,
+      "z": 5.113756150293766,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 9
+    },
+    {
+      "name": "Iron Age begins",
+      "t": -1200,
+      "x": -1.2,
+      "y": 3.4489615407056284,
+      "z": 4.37353036122041,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 10
+    },
+    {
+      "name": "First Olympic Games",
+      "t": -776,
+      "x": -0.776,
+      "y": 3.3424502514793497,
+      "z": 4.849030490160815,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 11
+    },
+    {
+      "name": "Founding of Rome",
+      "t": -753,
+      "x": -0.753,
+      "y": 3.2156785084190624,
+      "z": 4.901470900262744,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 12
+    },
+    {
+      "name": "Buddha born",
+      "t": -563,
+      "x": -0.5630000000000001,
+      "y": 2.9920579122951994,
+      "z": 6.22450585676123,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 13
+    },
+    {
+      "name": "Confucius born",
+      "t": -551,
+      "x": -0.551,
+      "y": 3.05091099281542,
+      "z": 6.304442804626494,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 14
+    },
+    {
+      "name": "Athenian democracy established",
+      "t": -508,
+      "x": -0.508,
+      "y": 3.304653179397032,
+      "z": 6.526982383071685,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 15
+    },
+    {
+      "name": "Ionian Revolt begins",
+      "t": -499,
+      "x": -0.499,
+      "y": 3.3626773717006033,
+      "z": 6.559559235218313,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 2,
+      "index": 16
+    },
+    {
+      "name": "Battle of Marathon",
+      "t": -490,
+      "x": -0.49,
+      "y": 3.4211623405624154,
+      "z": 6.5871192075489375,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 17
+    },
+    {
+      "name": "Battle of Thermopylae",
+      "t": -480,
+      "x": -0.48,
+      "y": 3.4860148796196415,
+      "z": 6.611914733699331,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 18
+    },
+    {
+      "name": "Death of Socrates",
+      "t": -399,
+      "x": -0.399,
+      "y": 3.924141475765025,
+      "z": 6.623851290589987,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 19
+    },
+    {
+      "name": "Birth of Aristotle",
+      "t": -384,
+      "x": -0.384,
+      "y": 3.97539573467121,
+      "z": 6.602109862404241,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 20
+    },
+    {
+      "name": "Alexander the Great born",
+      "t": -356,
+      "x": -0.356,
+      "y": 4.0399921334785285,
+      "z": 6.558069080779602,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 21
+    },
+    {
+      "name": "Death of Alexander",
+      "t": -323,
+      "x": -0.323,
+      "y": 4.066893754504758,
+      "z": 6.5184572876858855,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 22
+    },
+    {
+      "name": "Ashoka unifies India",
+      "t": -261,
+      "x": -0.261,
+      "y": 4.020559544110748,
+      "z": 6.549971732745043,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 23
+    },
+    {
+      "name": "Great Wall construction begins",
+      "t": -221,
+      "x": -0.221,
+      "y": 3.98064194137455,
+      "z": 6.671382800217811,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 24
+    },
+    {
+      "name": "Julius Caesar assassinated",
+      "t": -44,
+      "x": -0.044,
+      "y": 4.661095722022092,
+      "z": 7.603630351190535,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 25
+    },
+    {
+      "name": "Cleopatra dies",
+      "t": -30,
+      "x": -0.03,
+      "y": 4.78126165348448,
+      "z": 7.640129911417458,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 26
+    },
+    {
+      "name": "Augustus becomes Emperor",
+      "t": -27,
+      "x": -0.027,
+      "y": 4.80761305386379,
+      "z": 7.6463255217063235,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 27
+    },
+    {
+      "name": "Jesus of Nazareth born",
+      "t": -4,
+      "x": -0.004,
+      "y": 5.013796543678945,
+      "z": 7.6738774997374835,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 0,
+      "index": 28
+    },
+    {
+      "name": "Eruption of Vesuvius",
+      "t": 79,
+      "x": 0.079,
+      "y": 5.701105678004529,
+      "z": 7.488673894615399,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 29
+    },
+    {
+      "name": "Colosseum completed",
+      "t": 80,
+      "x": 0.08,
+      "y": 5.707837988840336,
+      "z": 7.484163147903955,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 30
+    },
+    {
+      "name": "Constantine converts to Christianity",
+      "t": 312,
+      "x": 0.312,
+      "y": 5.990168056686649,
+      "z": 6.658064238158143,
+      "arc": "Grip",
+      "color": "#e1a95e",
+      "level": 1,
+      "index": 31
+    },
+    {
+      "name": "Fall of Western Rome",
+      "t": 476,
+      "x": 0.47600000000000003,
+      "y": 6.484440265842115,
+      "z": 6.831308744853427,
+      "arc": "Settlement",
+      "color": "#7ef5b8",
+      "level": 0,
+      "index": 32
+    },
+    {
+      "name": "Muhammad born",
+      "t": 570,
+      "x": 0.5700000000000001,
+      "y": 6.969233210005695,
+      "z": 6.465485118601041,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 33
+    },
+    {
+      "name": "Islamic Golden Age begins",
+      "t": 750,
+      "x": 0.75,
+      "y": 6.716657367257624,
+      "z": 5.433327693587909,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 34
+    },
+    {
+      "name": "Charlemagne crowned Emperor",
+      "t": 800,
+      "x": 0.8,
+      "y": 6.471239169833732,
+      "z": 5.395435454367565,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 35
+    },
+    {
+      "name": "Viking Age begins",
+      "t": 793,
+      "x": 0.793,
+      "y": 6.503510480113961,
+      "z": 5.39215800328927,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 36
+    },
+    {
+      "name": "Norman Conquest of England",
+      "t": 1066,
+      "x": 1.066,
+      "y": 6.587973325105698,
+      "z": 5.710891569276026,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 37
+    },
+    {
+      "name": "First Crusade",
+      "t": 1096,
+      "x": 1.096,
+      "y": 6.6277558540556205,
+      "z": 5.6112450386759845,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 38
+    },
+    {
+      "name": "Genghis Khan unites Mongols",
+      "t": 1206,
+      "x": 1.206,
+      "y": 6.418188687258169,
+      "z": 5.252393746177954,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 0,
+      "index": 39
+    },
+    {
+      "name": "Magna Carta",
+      "t": 1215,
+      "x": 1.215,
+      "y": 6.380155872990059,
+      "z": 5.239227899992144,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 40
+    },
+    {
+      "name": "Black Death reaches Europe",
+      "t": 1347,
+      "x": 1.347,
+      "y": 5.870204189209282,
+      "z": 5.527162660746735,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 0,
+      "index": 41
+    },
+    {
+      "name": "Ming Dynasty begins",
+      "t": 1368,
+      "x": 1.368,
+      "y": 5.8469637606547,
+      "z": 5.635670459527894,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 42
+    },
+    {
+      "name": "Gutenberg printing press",
+      "t": 1440,
+      "x": 1.44,
+      "y": 5.956250447539591,
+      "z": 6.000881574858157,
+      "arc": "Settlement",
+      "color": "#7ef5b8",
+      "level": 1,
+      "index": 43
+    },
+    {
+      "name": "Fall of Constantinople",
+      "t": 1453,
+      "x": 1.453,
+      "y": 6.003922458972546,
+      "z": 6.053386108412658,
+      "arc": "Settlement",
+      "color": "#7ef5b8",
+      "level": 0,
+      "index": 44
+    },
+    {
+      "name": "Columbus reaches Americas",
+      "t": 1492,
+      "x": 1.492,
+      "y": 6.180705225305991,
+      "z": 6.1654855896853675,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 45
+    },
+    {
+      "name": "Luther's 95 Theses",
+      "t": 1517,
+      "x": 1.5170000000000001,
+      "y": 6.30842139293794,
+      "z": 6.196132480562858,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 46
+    },
+    {
+      "name": "Magellan circumnavigates globe",
+      "t": 1522,
+      "x": 1.522,
+      "y": 6.334209369797151,
+      "z": 6.198218685302306,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 47
+    },
+    {
+      "name": "Copernicus publishes heliocentric model",
+      "t": 1543,
+      "x": 1.543,
+      "y": 6.440425393196866,
+      "z": 6.192614679101123,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 48
+    },
+    {
+      "name": "Shakespeare born",
+      "t": 1564,
+      "x": 1.564,
+      "y": 6.539074382105589,
+      "z": 6.165287159664882,
+      "arc": "Enclosure",
+      "color": "#9b7ef5",
+      "level": 1,
+      "index": 49
+    },
+    {
+      "name": "Galileo observes Jupiter's moons",
+      "t": 1610,
+      "x": 1.61,
+      "y": 6.705724994452426,
+      "z": 6.046280347166342,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 50
+    },
+    {
+      "name": "Newton publishes Principia",
+      "t": 1687,
+      "x": 1.687,
+      "y": 6.776489680927501,
+      "z": 5.789520520885028,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 51
+    },
+    {
+      "name": "American Independence",
+      "t": 1776,
+      "x": 1.776,
+      "y": 6.622656076354841,
+      "z": 5.679188881773936,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 52
+    },
+    {
+      "name": "French Revolution",
+      "t": 1789,
+      "x": 1.7890000000000001,
+      "y": 6.598183995904252,
+      "z": 5.690991448227266,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 53
+    },
+    {
+      "name": "Haitian Revolution",
+      "t": 1791,
+      "x": 1.7910000000000001,
+      "y": 6.5946810538736464,
+      "z": 5.693422865375951,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 54
+    },
+    {
+      "name": "Napoleon crowned Emperor",
+      "t": 1804,
+      "x": 1.804,
+      "y": 6.57412076725911,
+      "z": 5.7130000541703865,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 55
+    },
+    {
+      "name": "Battle of Waterloo",
+      "t": 1815,
+      "x": 1.815,
+      "y": 6.560310022780036,
+      "z": 5.73430879732822,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 56
+    },
+    {
+      "name": "Steam locomotive (Stephenson)",
+      "t": 1825,
+      "x": 1.825,
+      "y": 6.551180430711475,
+      "z": 5.7570055385590155,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 57
+    },
+    {
+      "name": "Darwin publishes Origin of Species",
+      "t": 1859,
+      "x": 1.859,
+      "y": 6.549877549568987,
+      "z": 5.851410953137757,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 58
+    },
+    {
+      "name": "US Civil War begins",
+      "t": 1861,
+      "x": 1.861,
+      "y": 6.551397180462543,
+      "z": 5.857498774074301,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 59
+    },
+    {
+      "name": "Abolition of US slavery",
+      "t": 1865,
+      "x": 1.865,
+      "y": 6.5550024998710406,
+      "z": 5.869760135750896,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 60
+    },
+    {
+      "name": "Meiji Restoration (Japan)",
+      "t": 1868,
+      "x": 1.868,
+      "y": 6.558205986963642,
+      "z": 5.879012098420834,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 61
+    },
+    {
+      "name": "Telephone invented",
+      "t": 1876,
+      "x": 1.8760000000000001,
+      "y": 6.568863923132607,
+      "z": 5.903783797704804,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 62
+    },
+    {
+      "name": "Light bulb invented",
+      "t": 1879,
+      "x": 1.879,
+      "y": 6.573658977557151,
+      "z": 5.913063076030298,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 63
+    },
+    {
+      "name": "First powered flight",
+      "t": 1903,
+      "x": 1.903,
+      "y": 6.627666223152911,
+      "z": 5.984751548100311,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 64
+    },
+    {
+      "name": "Einstein publishes relativity",
+      "t": 1905,
+      "x": 1.905,
+      "y": 6.633402404780845,
+      "z": 5.990366146573909,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 65
+    },
+    {
+      "name": "World War I begins",
+      "t": 1914,
+      "x": 1.9140000000000001,
+      "y": 6.6614794279543155,
+      "z": 6.014598065602749,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 66
+    },
+    {
+      "name": "Russian Revolution",
+      "t": 1917,
+      "x": 1.917,
+      "y": 6.671642968286034,
+      "z": 6.022250271666689,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 67
+    },
+    {
+      "name": "World War I ends",
+      "t": 1918,
+      "x": 1.9180000000000001,
+      "y": 6.675118029454239,
+      "z": 6.024748789950884,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 68
+    },
+    {
+      "name": "Penicillin discovered",
+      "t": 1928,
+      "x": 1.928,
+      "y": 6.712192052868861,
+      "z": 6.048155188396063,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 69
+    },
+    {
+      "name": "World War II begins",
+      "t": 1939,
+      "x": 1.939,
+      "y": 6.75756921033414,
+      "z": 6.070135749491195,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 70
+    },
+    {
+      "name": "D-Day",
+      "t": 1944,
+      "x": 1.944,
+      "y": 6.7796555937648995,
+      "z": 6.078648020308315,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 71
+    },
+    {
+      "name": "Atomic bomb dropped on Hiroshima",
+      "t": 1945,
+      "x": 1.945,
+      "y": 6.7841752587112,
+      "z": 6.080231547854556,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 72
+    },
+    {
+      "name": "World War II ends",
+      "t": 1945,
+      "x": 1.945,
+      "y": 6.7841752587112,
+      "z": 6.080231547854556,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 73
+    },
+    {
+      "name": "United Nations founded",
+      "t": 1945,
+      "x": 1.945,
+      "y": 6.7841752587112,
+      "z": 6.080231547854556,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 74
+    },
+    {
+      "name": "India gains independence",
+      "t": 1947,
+      "x": 1.947,
+      "y": 6.793313394846185,
+      "z": 6.083276104830628,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 75
+    },
+    {
+      "name": "Israel established",
+      "t": 1948,
+      "x": 1.948,
+      "y": 6.797930945533736,
+      "z": 6.084736266088498,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 76
+    },
+    {
+      "name": "DNA structure discovered",
+      "t": 1953,
+      "x": 1.953,
+      "y": 6.821484632740646,
+      "z": 6.091399047826483,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 77
+    },
+    {
+      "name": "Sputnik launched",
+      "t": 1957,
+      "x": 1.957,
+      "y": 6.840857433272714,
+      "z": 6.095939418330652,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 78
+    },
+    {
+      "name": "Cuban Missile Crisis",
+      "t": 1962,
+      "x": 1.962,
+      "y": 6.865682588118284,
+      "z": 6.100587555438482,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 79
+    },
+    {
+      "name": "Moon Landing",
+      "t": 1969,
+      "x": 1.969,
+      "y": 6.901456100894954,
+      "z": 6.10509935634115,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 80
+    },
+    {
+      "name": "Fall of Saigon",
+      "t": 1975,
+      "x": 1.975,
+      "y": 6.932935244099937,
+      "z": 6.107040682212742,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 81
+    },
+    {
+      "name": "First personal computer",
+      "t": 1977,
+      "x": 1.977,
+      "y": 6.9435728306653814,
+      "z": 6.1072816389594236,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 82
+    },
+    {
+      "name": "Chernobyl disaster",
+      "t": 1986,
+      "x": 1.986,
+      "y": 6.992170457855734,
+      "z": 6.105787067604189,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 83
+    },
+    {
+      "name": "Berlin Wall falls",
+      "t": 1989,
+      "x": 1.989,
+      "y": 7.008583749244626,
+      "z": 6.104334462063468,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 84
+    },
+    {
+      "name": "World Wide Web launched",
+      "t": 1991,
+      "x": 1.991,
+      "y": 7.01957107401606,
+      "z": 6.103097014945844,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 85
+    },
+    {
+      "name": "Soviet Union dissolves",
+      "t": 1991,
+      "x": 1.991,
+      "y": 7.01957107401606,
+      "z": 6.103097014945844,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 86
+    },
+    {
+      "name": "Mandela becomes president",
+      "t": 1994,
+      "x": 1.994,
+      "y": 7.036107298433321,
+      "z": 6.100834553493584,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 87
+    },
+    {
+      "name": "September 11 attacks",
+      "t": 2001,
+      "x": 2.001,
+      "y": 7.074861575463458,
+      "z": 6.093644390266274,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 88
+    },
+    {
+      "name": "Human genome sequenced",
+      "t": 2003,
+      "x": 2.003,
+      "y": 7.085955089351881,
+      "z": 6.091095733574832,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 89
+    },
+    {
+      "name": "iPhone released",
+      "t": 2007,
+      "x": 2.007,
+      "y": 7.108136837694234,
+      "z": 6.085336741940466,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 90
+    },
+    {
+      "name": "Arab Spring begins",
+      "t": 2011,
+      "x": 2.011,
+      "y": 7.130277490374819,
+      "z": 6.078694632414392,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 91
+    },
+    {
+      "name": "Higgs boson discovered",
+      "t": 2012,
+      "x": 2.012,
+      "y": 7.135801440289093,
+      "z": 6.076896154988383,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 92
+    },
+    {
+      "name": "COVID-19 pandemic begins",
+      "t": 2020,
+      "x": 2.02,
+      "y": 7.179732045484539,
+      "z": 6.060527796658787,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 1,
+      "index": 93
+    },
+    {
+      "name": "ChatGPT released",
+      "t": 2022,
+      "x": 2.0220000000000002,
+      "y": 7.190618888158309,
+      "z": 6.055888023220665,
+      "arc": "Frontier",
+      "color": "#7eb8f5",
+      "level": 2,
+      "index": 94
+    }
+  ],
+  "metadata": {
+    "t_min": -10000,
+    "t_max": 2026,
+    "segment_size": 50,
+    "total_segments": 241,
+    "total_events": 95,
+    "arc_colors": {
+      "Frontier": "#7eb8f5",
+      "Enclosure": "#9b7ef5",
+      "Settlement": "#7ef5b8",
+      "Grip": "#e1a95e",
+      "Fracture": "#ff6b6b"
+    }
+  }
+}

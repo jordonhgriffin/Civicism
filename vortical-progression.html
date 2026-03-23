@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vortical Progression</title>
+  <style>
+    /* Earth Tones Palette from civicism.html */
+    :root {
+      --color-sienna: #882d17;
+      --color-umber: #635147;
+      --color-ochre: #cc7722;
+      --color-terracotta: #E2725B;
+      --color-clay: #B66A50;
+      --color-earth-yellow: #E1A95E;
+      --color-peru: #BD843B;
+      --color-russet: #8C5324;
+      --color-chestnut: #954535;
+      --color-walnut: #A52A2A;
+      --color-mahogany: #C04000;
+      --color-burnt-sienna: #E97451;
+      --color-raw-sienna: #D58258;
+      --color-sandy-beige: #F5F5DC;
+      --color-forest-brown: #786C3B;
+      --color-olive-green: #3E8E41;
+      --color-moss-green: #8A9A5B;
+      --color-taupe: #A8D7F5;
+      --color-cognac: #964B00;
+      --color-ivory: #FFFFF0;
+      --color-cream: #FFFDD0;
+      --color-oakwood: #786C3B;
+
+      --bg-dark: var(--color-umber);
+      --text-primary: var(--color-ivory);
+      --text-secondary: var(--color-cream);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-primary);
+    }
+    #c { display: block; width: 100vw; height: 100vh; }
+    #label-root {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .tick-lbl {
+      color: var(--color-cream);
+      opacity: 0.5;
+      font-size: 10px;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2005;
+    }
+    .axis-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      pointer-events: none;
+      z-index: 2005;
+    }
+    .axis-name.t { color: var(--color-earth-yellow); }
+    .axis-name.y { color: var(--color-terracotta); }
+    .axis-name.z { color: var(--color-moss-green); }
+
+    /* Civicism Link Button */
+    .civicism-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid rgba(225, 169, 94, 0.4);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--color-earth-yellow);
+      font-size: 10px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .civicism-link:hover {
+      background: rgba(225, 169, 94, 0.1);
+      border-color: var(--color-earth-yellow);
+    }
+
+    .civicism-link .link-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .civicism-link .link-arrow {
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .civicism-link:hover .link-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Doc Link Button (for opening info panel) */
+    .doc-link-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(225, 169, 94, 0.1);
+      border: 1px solid rgba(225, 169, 94, 0.3);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--color-ivory);
+      font-size: 11px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .doc-link-btn:hover {
+      background: rgba(225, 169, 94, 0.2);
+      border-color: var(--color-earth-yellow);
+    }
+
+    .doc-link-btn .link-icon {
+      font-size: 14px;
+    }
+
+    .era-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-ivory);
+      background: rgba(99, 81, 71, 0.85);
+      padding: 3px 7px;
+      border-radius: 3px;
+      border-left: 2px solid var(--color-earth-yellow);
+      pointer-events: none;
+    }
+    .period-lbl {
+      font-size: 9px;
+      letter-spacing: .05em;
+      color: var(--color-cream);
+      opacity: 0.6;
+      background: rgba(99, 81, 71, 0.7);
+      padding: 2px 6px;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .time-period-marker {
+      position: absolute;
+      color: var(--color-cream);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      pointer-events: none;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: opacity 0.3s ease;
+      z-index: 10;
+      white-space: nowrap;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(200, 200, 200, 0.1);
+      background: rgba(99, 81, 71, 0.9);
+    }
+
+    .time-period-marker.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .axis-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .axis-name.t { color: #e1a95e; }
+    .axis-name.y { color: #7eb8f5; }
+    .axis-name.z { color: #7ef5b8; }
+
+    .era-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-ivory);
+      background: rgba(99, 81, 71, 0.85);
+      padding: 3px 7px;
+      border-radius: 3px;
+      border-left: 2px solid var(--color-earth-yellow);
+      pointer-events: none;
+    }
+
+    .period-lbl {
+      font-size: 8px;
+      letter-spacing: .05em;
+      color: var(--color-cream);
+      opacity: 0.6;
+      background: rgba(99, 81, 71, 0.7);
+      padding: 2px 6px;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .time-period-marker {
+      position: absolute;
+      color: var(--color-ivory);
+      font-size: 8px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+    }
+
+    .time-period-marker.hidden {
+      opacity: 0;
+    }
+    .period-lbl {
+      font-size: 9px;
+      letter-spacing: .05em;
+      color: rgba(255,255,255,.5);
+      background: rgba(7,7,16,.6);
+      padding: 2px 6px;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    #ui {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 320px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      pointer-events: auto;
+      user-select: none;
+      background: rgba(99,81,71,0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* Version Display */
+    #version-display {
+      position: fixed;
+      bottom: 10px;
+      right: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      font-weight: 500;
+      pointer-events: auto;
+      z-index: 9999;
+    }
+
+    #version-display a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    #version-display a:hover {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    #ui h1 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      color: var(--color-earth-yellow);
+      margin-bottom: 4px;
+    }
+
+    #ui .motto {
+      font-size: 11px;
+      color: rgba(225, 169, 94, 0.5);
+      letter-spacing: .08em;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .section {
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 10px;
+    }
+
+    .legend { display: flex; flex-direction: column; gap: 6px; }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: rgba(255,255,255,.7);
+    }
+    .swatch {
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .explanation {
+      font-size: 11px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .explanation strong {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+    }
+
+    .preset-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .preset-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 10px 8px;
+      color: rgba(255,255,255,0.8);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .preset-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+
+    .preset-btn:active {
+      transform: translateY(0);
+    }
+
+    .doc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .doc-links a {
+      color: rgba(200, 184, 245, 0.8);
+      text-decoration: none;
+      font-size: 11px;
+      padding: 6px 10px;
+      background: rgba(200, 184, 245, 0.08);
+      border: 1px solid rgba(200, 184, 245, 0.15);
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .doc-links a:hover {
+      background: rgba(200, 184, 245, 0.15);
+      border-color: rgba(200, 184, 245, 0.3);
+      transform: translateX(3px);
+    }
+
+    .controls-hint {
+      font-size: 10px;
+      color: rgba(255,255,255,.35);
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+
+    .axis-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .axis-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .axis-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(225, 169, 94, 0.8);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Right side info panel */
+    #info-panel {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 380px;
+      max-height: calc(100vh - 80px);
+      background: rgba(99,81,71,0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 0;
+      transform: translateX(calc(100% + 40px));
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 3000;
+    }
+
+    #info-panel.active {
+      transform: translateX(0);
+    }
+
+    #info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(225, 169, 94, 0.05);
+    }
+
+    #info-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-earth-yellow);
+      letter-spacing: 0.05em;
+    }
+
+    #info-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    #info-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+
+    #info-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.85);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    #info-content h1 {
+      font-size: 18px;
+      color: var(--color-earth-yellow);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    #info-content h2 {
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 6px;
+    }
+
+    #info-content h3 {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 16px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    #info-content p {
+      margin-bottom: 12px;
+    }
+
+    #info-content strong {
+      color: rgba(255,255,255,0.95);
+      font-weight: 600;
+    }
+
+    #info-content code {
+      background: rgba(225, 169, 94, 0.15);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'SF Mono', 'Consolas', monospace;
+      font-size: 11px;
+      color: var(--color-earth-yellow);
+      word-wrap: break-word;
+    }
+    #info-content pre {
+      background: rgba(0,0,0,0.4);
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 12px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    #info-content pre code {
+      background: none;
+      padding: 0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    #info-content pre {
+      background: rgba(0,0,0,0.3);
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    #info-content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    #info-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 11px;
+    }
+    #info-content table th {
+      background: rgba(225, 169, 94, 0.15);
+      color: var(--color-earth-yellow);
+      font-weight: 600;
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+    #info-content table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.85);
+    }
+    #info-content table tr:last-child td {
+      border-bottom: none;
+    }
+
+    #info-content th,
+    #info-content td {
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    #info-content th {
+      background: rgba(225, 169, 94, 0.08);
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+    }
+
+    #info-content a {
+      color: var(--color-earth-yellow);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(225, 169, 94, 0.3);
+      transition: border-color 0.2s ease;
+    }
+
+    #info-content a:hover {
+      border-bottom-color: var(--color-earth-yellow);
+    }
+
+    #info-content ul,
+    #info-content ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    #info-content li {
+      margin-bottom: 6px;
+    }
+
+    #info-loading {
+      text-align: center;
+      padding: 40px;
+      color: rgba(225, 169, 94, 0.6);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="label-root"></div>
+<div id="loading">Loading Vortical Progression...</div>
+
+<!-- Right side info panel -->
+<div id="info-panel">
+  <div id="info-header">
+    <div id="info-title">Documentation</div>
+    <button id="info-close" onclick="closeInfoPanel()">&times;</button>
+  </div>
+  <div id="info-content">
+    <div id="info-loading">Select a document to view</div>
+  </div>
+</div>
+
+<div id="ui">
+  <h1>Vortical Progression</h1>
+  <div class="motto">
+    Societas Melior Pro Bono Omnium
+    <a href="https://civicism.jordonhgriffin.com" class="civicism-link">
+      <span class="link-text">← Back to Civicism</span>
+      <span class="link-arrow"></span>
+    </a>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Theory</div>
+    <a href="#" class="doc-link-btn" onclick="loadDocument('vortical-progression.md', 'Vortical Progression Theory'); return false;">
+      <span class="link-icon">📖</span>
+      <span>Vortical Progression Theory</span>
+    </a>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Trajectory</div>
+    <div class="legend">
+      <div class="legend-row">
+        <div class="swatch" style="background: linear-gradient(to right, rgb(51, 26, 102), rgb(230, 255, 255))"></div>
+        <span><strong>Vortical Progression</strong> — Single curve through time</span>
+      </div>
+    </div>
+    <div class="explanation" style="margin-top: 8px; font-size: 10px; color: rgba(255,255,255,0.5);">
+      <strong>Three frequency components</strong> (~6,280 yr, ~1,885 yr, ~503 yr) combine through interference to create recursive oscillations.
+      <strong>Color gradient:</strong> deep indigo (ancient) → bright cyan-white (present).
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Axes</div>
+    <div class="axis-legend">
+      <div class="axis-item">
+        <div class="axis-color" style="background:#e1a95e"></div>
+        <span><strong style="color:#e1a95e">X — Time</strong> (−10,000 BC to 2026 AD)</span>
+      </div>
+      <div class="axis-item">
+        <div class="axis-color" style="background:#7eb8f5"></div>
+        <span><strong style="color:#7eb8f5">Y — Capability</strong> (0–100) — What humans can do</span>
+      </div>
+      <div class="axis-item">
+        <div class="axis-color" style="background:#7ef5b8"></div>
+        <span><strong style="color:#7ef5b8">Z — Governance</strong> (0–100) — Rules & structures</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Arc States</div>
+    <div class="explanation">
+      The relationship between Capability (y) and Governance (z) determines which arc civilization occupies:
+    </div>
+    <div class="arc-table" style="margin-top: 10px; font-size: 10px; line-height: 1.8;">
+      <div><strong style="color:#c8e8ff">Frontier</strong> — y >> z (high capability, low governance)</div>
+      <div><strong style="color:#9b7ef5">Enclosure</strong> — y > z, ż > 0 (winners consolidate)</div>
+      <div><strong style="color:#7ef5b8">Settlement</strong> — z ≥ y, stable (constructive equilibrium)</div>
+      <div><strong style="color:#e1a95e">Grip</strong> — z >> y, ẏ ≤ 0 (calcified suppression)</div>
+      <div><strong style="color:#ff6b6b">Fracture</strong> — ż < 0, ẏ > 0 (system breaks, resets)</div>
+    </div>
+    <div class="explanation" style="margin-top: 10px; font-size: 10px; color: rgba(255,255,255,0.4);">
+      See <a href="#" onclick="loadDocument('cycles-over-time.md', 'Cycles Over Time'); return false;" style="color: rgba(225, 169, 94, 0.8);">Cycles Over Time</a> for full arc documentation.
+    </div>
+    </div>
+
+  <div class="section">
+    <div class="section-title">Preset Views</div>
+    <div class="preset-buttons">
+      <button class="preset-btn" onclick="setPreset('overview')">Overview</button>
+      <button class="preset-btn" onclick="setPreset('yz-view')">Y-Z Plane</button>
+      <button class="preset-btn" onclick="setPreset('convergence')">Convergence</button>
+      <button class="preset-btn" onclick="setPreset('deep-history')">Deep History</button>
+      <button class="preset-btn" onclick="setPreset('ancient-amplitude')">Ancient Amplitude</button>
+      <button class="preset-btn" onclick="setPreset('present')">Present Day</button>
+      <button class="preset-btn" onclick="setPreset('side')">Side View</button>
+      <button class="preset-btn" onclick="setPreset('top')">Top View</button>
+      <button class="preset-btn" onclick="setPreset('frontier')">Frontier Era</button>
+      <button class="preset-btn" onclick="setPreset('cube')">Cube View</button>
+      <button class="preset-btn" onclick="setPreset('events')">Event Timeline</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Documentation</div>
+    <div class="doc-links">
+      <a href="#" onclick="loadDocument('cycles-over-time.md', 'Cycles Over Time'); return false;">Cycles Over Time</a>
+      <a href="#" onclick="loadDocument('the-books.md', 'The Books'); return false;">The Books</a>
+      <a href="#" onclick="loadDocument('survival-of-the-fittest.md', 'Survival of the Fittest'); return false;">Survival of the Fittest</a>
+      <a href="#" onclick="loadDocument('wild-west.md', 'Wild West Ideology'); return false;">Wild West Ideology</a>
+      <a href="#" onclick="loadDocument('time-as-governance.md', 'Time as Governance'); return false;">Time as Governance</a>
+    </div>
+  </div>
+
+  <div class="controls-hint">
+    <strong>Controls:</strong> Drag to rotate · Scroll to zoom · Right-drag to pan<br>
+    The helix tightens toward the present—this is the vortical convergence.
+  </div>
+</div>
+
+<!-- Info panel functions -->
+<script>
+// Simple markdown to HTML converter
+function markdownToHTML(md) {
+  // Escape HTML
+  let html = md.replace(/&/g, '&amp;').replace(/\u003c/g, '&lt;').replace(/\u003e/g, '&gt;');
+
+  // Headers
+  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+  // Bold and italic
+  html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+  // Code blocks
+  html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+  // Tables (proper handling with headers)
+  const lines = html.split('\n');
+  let inTable = false;
+  let tableRows = [];
+  let tableHeaders = [];
+  let processedHtml = [];
+  let tableStartIdx = -1;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.startsWith('|')) {
+      if (!inTable) {
+        inTable = true;
+        tableStartIdx = i;
+        tableRows = [];
+        tableHeaders = [];
+      }
+      const cells = line.split('|').map(c => c.trim()).filter(c => c);
+      if (cells.length > 0) {
+        // Check if this is a separator row (all cells contain only dashes and optional colons for alignment)
+        if (cells.every(c => /^:?-+:?$/.test(c))) {
+          // This is a header separator row, skip it but mark that we have headers
+          continue;
+        }
+        // First non-separator row in a table is the header
+        if (tableRows.length === 0 && tableHeaders.length === 0) {
+          tableHeaders = cells;
+        } else {
+          tableRows.push(cells);
+        }
+      }
+    } else if (inTable) {
+      // End of table - build the table HTML
+      inTable = false;
+      if (tableHeaders.length > 0) {
+        let tableHtml = '<table>';
+        // Add header row
+        tableHtml += '<thead><tr>' + tableHeaders.map(c => `<th>${c}</th>`).join('') + '</tr></thead>';
+        // Add data rows
+        if (tableRows.length > 0) {
+          tableHtml += '<tbody>' + tableRows.map(row => '<tr>' + row.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+        }
+        tableHtml += '</table>';
+        processedHtml.push(tableHtml);
+      }
+      tableHeaders = [];
+      tableRows = [];
+      tableStartIdx = -1;
+      processedHtml.push(line);
+    } else {
+      processedHtml.push(line);
+    }
+  }
+  
+  // Handle table at end of document
+  if (inTable && tableHeaders.length > 0) {
+    let tableHtml = '<table>';
+    tableHtml += '<thead><tr>' + tableHeaders.map(c => `<th>${c}</th>`).join('') + '</tr></thead>';
+    if (tableRows.length > 0) {
+      tableHtml += '<tbody>' + tableRows.map(row => '<tr>' + row.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody>';
+    }
+    tableHtml += '</table>';
+    processedHtml.push(tableHtml);
+  }
+  
+  html = processedHtml.join('\n');
+
+  // Lists - process BEFORE paragraphs
+  // First, convert list items
+  html = html.replace(/^\s*[-*]\s+(.*$)/gim, '<li>$1</li>');
+  
+  // Then wrap consecutive list items in ul
+  // Use a different approach - find all li elements and group them
+  let listMatch = html.match(/(<li>.*?<\/li>\n*)+/g);
+  if (listMatch) {
+    listMatch.forEach(match => {
+      const wrapped = '<ul>' + match.replace(/\n+$/, '') + '</ul>';
+      html = html.replace(match, wrapped);
+    });
+  }
+
+  // Paragraphs (blank lines) - only wrap text that's not already in tags
+  // Split by double newlines and process each chunk
+  const chunks = html.split(/\n\n/);
+  const processedChunks = chunks.map(chunk => {
+    const trimmed = chunk.trim();
+    if (!trimmed) return '';
+    // Don't wrap if already a block element
+    if (trimmed.startsWith('<h') || trimmed.startsWith('<pre>') || 
+        trimmed.startsWith('<ul>') || trimmed.startsWith('<table>') ||
+        trimmed.startsWith('<li>') || trimmed.startsWith('</ul>')) {
+      return trimmed;
+    }
+    return '<p>' + trimmed + '</p>';
+  });
+  html = processedChunks.filter(c => c).join('\n');
+
+  // Clean up empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+
+  return html;
+}
+
+// Load and display a markdown document
+async function loadDocument(filename, title) {
+  const panel = document.getElementById('info-panel');
+  const content = document.getElementById('info-content');
+  const titleEl = document.getElementById('info-title');
+
+  // Show panel
+  panel.classList.add('active');
+  titleEl.textContent = title;
+  content.innerHTML = '<div id="info-loading">Loading...📄</div>';
+
+  try {
+    const response = await fetch(`context/Vortical-Progression/${filename}`);
+    if (!response.ok) {
+      throw new Error(`Failed to load: ${response.status}`);
+    }
+    const md = await response.text();
+    const html = markdownToHTML(md);
+    content.innerHTML = html;
+  } catch (error) {
+    content.innerHTML = `<div style="color: #ff6b6b; padding: 20px;">
+      <strong>Error loading document</strong><br>
+      ${error.message}
+    </div>`;
+  }
+}
+
+// Close the info panel
+function closeInfoPanel() {
+  document.getElementById('info-panel').classList.remove('active');
+}
+
+// Close panel when clicking outside (on canvas)
+document.addEventListener('click', function(e) {
+  const panel = document.getElementById('info-panel');
+  const ui = document.getElementById('ui');
+
+  // If panel is active and click is outside panel and outside UI
+  if (panel.classList.contains('active') &&
+      !panel.contains(e.target) &&
+      !ui.contains(e.target)) {
+    closeInfoPanel();
+  }
+});
+
+// Also update the arc states link to use the panel
+document.addEventListener('DOMContentLoaded', function() {
+  const arcLink = document.querySelector('.explanation a[href*="cycles-over-time"]');
+  if (arcLink) {
+    arcLink.onclick = function(e) {
+      e.preventDefault();
+      loadDocument('cycles-over-time.md', 'Cycles Over Time');
+    };
+  }
+});
+</script>
+
+<script type="module">
+console.log('Script module loading...');
+
+let scene, camera, controls, renderer, labelRenderer;
+let isLoaded = false;
+
+// Make setPreset available globally
+window.setPreset = function(presetName) {
+  if (!isLoaded) return;
+
+  const presets = {
+    'overview': {
+      pos: [15, 12, 25],
+      target: [-4, 5, 5],
+      desc: 'Full view of the vortical progression from 10,000 BC to present'
+    },
+    'yz-view': {
+      pos: [-25, 5, 5],
+      target: [-4, 5, 5],
+      desc: 'Y-Z plane: Capability (vertical) vs Governance (horizontal)'
+    },
+    'convergence': {
+      pos: [3, 8, 12],
+      target: [2, 6, 5],
+      desc: 'Zoomed in on present day (2000-2026) showing tight amplitude'
+    },
+    'deep-history': {
+      pos: [-12, 8, 12],
+      target: [-8, 5, 5],
+      desc: 'View from the ancient past, showing large early oscillations'
+    },
+    'ancient-amplitude': {
+      pos: [-8, 15, 8],
+      target: [-6, 5, 5],
+      desc: 'View of ancient era (-8000 to -4000 BCE) with large oscillations'
+    },
+    'present': {
+      pos: [4, 7, 8],
+      target: [2, 5, 5],
+      desc: 'Focused on 2026 AD, showing the converged modern era'
+    },
+    'side': {
+      pos: [20, 5, 0],
+      target: [-4, 5, 5],
+      desc: 'Side view emphasizing Capability-Governance oscillations'
+    },
+    'top': {
+      pos: [-4, 35, 5],
+      target: [-4, 5, 5],
+      desc: 'Top-down view showing the vortical spiral convergence'
+    },
+    'frontier': {
+      pos: [-10, 10, 15],
+      target: [-8.5, 5, 5],
+      desc: 'The Hunter-Gatherer Frontier (~8,500 BC)'
+    },
+    'cube': {
+      pos: [18, 15, 18],
+      target: [-2, 5, 5],
+      desc: 'Angle showing all three axes and grid structure clearly'
+    },
+    'events': {
+      pos: [6, 3, 8],
+      target: [0, 0, 0],
+      desc: 'Optimized for reading historical events along timeline edges'
+    }
+  };
+
+  const preset = presets[presetName];
+  if (!preset) return;
+
+  // Smooth camera transition
+  const startPos = camera.position.clone();
+  const startTarget = controls.target.clone();
+  const endPos = new THREE.Vector3(...preset.pos);
+  const endTarget = new THREE.Vector3(...preset.target);
+
+  let progress = 0;
+  const duration = 1000; // ms
+  const startTime = performance.now();
+
+  function animate() {
+    const elapsed = performance.now() - startTime;
+    progress = Math.min(elapsed / duration, 1);
+
+    // Ease out cubic
+    const ease = 1 - Math.pow(1 - progress, 3);
+
+    camera.position.lerpVectors(startPos, endPos, ease);
+    controls.target.lerpVectors(startTarget, endTarget, ease);
+    controls.update();
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  animate();
+};
+
+import * as THREE from 'https://esm.sh/three@0.162.0';
+console.log('THREE imported:', THREE);
+import { OrbitControls } from 'https://esm.sh/three@0.162.0/examples/jsm/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'https://esm.sh/three@0.162.0/examples/jsm/renderers/CSS2DRenderer.js';
+console.log('All imports successful');
+
+// ─── coordinate scaling ───────────────────────────────────────────────────────
+// x = time / 1000   →  −10 … 2.026
+// y = capability / 10  →  0 … 10
+// z = governance / 10  →  0 … 10
+
+const T_MIN = -10000, T_MAX = 2026, T_MAX_AXIS = 10000, N = T_MAX - T_MIN + 1;
+const XS = 1 / 1000, YZS = 1 / 10;
+
+// ─── VP math ─────────────────────────────────────────────────────────────────
+const sig = t => 1 / (1 + Math.exp(-t / 2000));
+const env = t => 1 - sig(t) / 2;
+
+// Vortical Progression parametric curve
+// Three frequency components added together (not geometrically nested)
+function vorticalPoint(t) {
+  const s = sig(t), e = env(t), fl = 36 + 29 * s;
+  return new THREE.Vector3(
+    t * XS,
+    (fl + e * (20 * Math.sin(t / 1000) + 10 * Math.sin(t / 300) + 5 * Math.sin(t / 80))) * YZS,
+    (fl + e * (20 * Math.cos(t / 1000) + 10 * Math.cos(t / 300) + 5 * Math.cos(t / 80))) * YZS
+  );
+}
+
+// ─── generate geometry ───────────────────────────────────────────────────────
+console.log('Starting geometry generation...');
+console.time('geometry');
+
+const curvePts = Array.from({ length: N }, (_, i) => vorticalPoint(T_MIN + i));
+console.log(`Generated ${curvePts.length} curve points`);
+console.timeEnd('geometry');
+
+// ─── renderer setup ──────────────────────────────────────────────────────────
+const canvas = document.getElementById('c');
+const labelRoot = document.getElementById('label-root');
+
+renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x635147, 1);
+
+labelRenderer = new CSS2DRenderer({ element: labelRoot });
+labelRenderer.setSize(window.innerWidth, window.innerHeight);
+
+scene = new THREE.Scene();
+camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.01, 500);
+camera.position.set(6, 10, 20);
+
+controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(-2, 5, 5);
+controls.enableDamping = true;
+controls.dampingFactor = 0.07;
+controls.minDistance = 0.5;
+controls.maxDistance = 100;
+controls.update();
+
+// ─── curve line ─────────────────────────────────────────────────────────────
+// Single vortical progression curve with three frequency components
+const curveGeo = new THREE.BufferGeometry().setFromPoints(curvePts);
+
+// ─── Load pre-calculated arc-colored segments ────────────────────────────────
+let vorticalData = null;
+
+async function loadVorticalData() {
+  try {
+    const response = await fetch('context/vortical-data.json');
+    vorticalData = await response.json();
+    console.log('Loaded vortical data:', vorticalData.metadata);
+    
+    // Render arc-colored segments
+    vorticalData.segments.forEach(segment => {
+      const startIdx = segment.t_start - T_MIN;
+      const endIdx = segment.t_end - T_MIN;
+      
+      // Get points for this segment
+      const segmentPoints = [];
+      for (let i = startIdx; i <= endIdx && i < curvePts.length; i++) {
+        segmentPoints.push(curvePts[i]);
+      }
+      
+      if (segmentPoints.length > 1) {
+        const segGeo = new THREE.BufferGeometry().setFromPoints(segmentPoints);
+        const segMat = new THREE.LineBasicMaterial({
+          color: segment.color,
+          opacity: 0.9,
+          transparent: true,
+          linewidth: 2
+        });
+        scene.add(new THREE.Line(segGeo, segMat));
+      }
+    });
+    
+    // Render events
+    vorticalData.events.forEach((event, index) => {
+      const isBack = index % 2 === 1;
+      const z = isBack ? 10 : 0;
+      const row = Math.floor(index / 2) % 3;
+      const yOffset = isBack ? (-1.5 - row * 0.6) : (-1.2 - row * 0.6);
+      
+      // Create event marker
+      const eventDiv = document.createElement('div');
+      eventDiv.className = 'time-period-marker';
+      eventDiv.textContent = event.name;
+      eventDiv.style.color = event.color;
+      eventDiv.style.borderLeft = `2px solid ${event.color}`;
+      eventDiv.style.paddingLeft = '6px';
+      
+      const eventObj = new CSS2DObject(eventDiv);
+      eventObj.position.set(event.x, yOffset, z);
+      scene.add(eventObj);
+    });
+    
+    // Hide loading
+    isLoaded = true;
+    document.getElementById('loading').style.opacity = '0';
+    
+  } catch (error) {
+    console.error('Failed to load vortical data:', error);
+    // Fallback: render simple gradient curve
+    const curveMat = new THREE.LineBasicMaterial({
+      color: 0xc8b8f5,
+      opacity: 0.9,
+      transparent: true
+    });
+    scene.add(new THREE.Line(curveGeo, curveMat));
+    isLoaded = true;
+    document.getElementById('loading').style.opacity = '0';
+  }
+}
+
+// Load data
+loadVorticalData();
+
+// ─── axis lines ──────────────────────────────────────────────────────────────
+function axisLine(a, b, color) {
+  const geo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...a), new THREE.Vector3(...b)]);
+  scene.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color, opacity: 0.85, transparent: true })));
+}
+// ─── time axes on both sides of the cube ────────────────────────────────────────
+// Front time axis (z = 0)
+axisLine([T_MIN * XS - 0.5, 0, 0], [T_MAX_AXIS * XS + 0.5, 0, 0], 0xe1a95e);
+// Back time axis (z = 10 - Governance max)
+axisLine([T_MIN * XS - 0.5, 0, 10], [T_MAX_AXIS * XS + 0.5, 0, 10], 0xe1a95e);
+axisLine([0, -0.4, 0], [0, 11, 0], 0x7eb8f5);                            // capability
+axisLine([0, 0, -0.4], [0, 0, 11], 0x7ef5b8);                            // governance
+
+// ─── CSS2D label helper ───────────────────────────────────────────────────────
+function lbl(text, cls, x, y, z) {
+  const div = document.createElement('div');
+  div.className = cls;
+  div.textContent = text;
+  const obj = new CSS2DObject(div);
+  obj.position.set(x, y, z);
+  scene.add(obj);
+}
+
+// time axis ticks (including future)
+[[-10000,'10,000 BC'],[-8000,'8,000 BC'],[-6000,'6,000 BC'],[-4000,'4,000 BC'],
+ [-2000,'2,000 BC'],[0,'1 AD'],[500,'500'],[1000,'1,000'],[1500,'1,500'],[2000,'2,000'],
+ [3000,'3,000'],[4000,'4,000'],[5000,'5,000'],[6000,'6,000'],[7000,'7,000'],
+ [8000,'8,000'],[9000,'9,000'],[10000,'10,000']]
+  .forEach(([t, label]) => lbl(label, 'tick-lbl', t * XS, -0.55, 0));
+
+// capability axis
+[0, 20, 40, 60, 80, 100].forEach(v => lbl(String(v), 'tick-lbl', -0.7, v * YZS, 0));
+
+// governance axis
+[0, 20, 40, 60, 80, 100].forEach(v => lbl(String(v), 'tick-lbl', 0.1, -0.4, v * YZS));
+
+// axis names
+lbl('Time', 'axis-name t', T_MAX_AXIS * XS + 0.3, -0.6, 0);
+lbl('Capability', 'axis-name y', -1.1, 5.5, 0);
+lbl('Governance', 'axis-name z', 0.1, -0.6, 5.5);
+
+// ─── civilizational period labels on the time axis ───────────────────────────
+const periodMarkers = [
+  { t: -9000, label: 'Hunter-Gatherer' },
+  { t: -6000, label: 'Agricultural' },
+  { t: -3000, label: 'Bronze Age' },
+  { t:  -800, label: 'Iron Age / Classical' },
+  { t:   600, label: 'Medieval' },
+  { t:  1650, label: 'Industrial' },
+  { t:  1960, label: 'Digital' },
+];
+periodMarkers.forEach(({ t, label }) => lbl(label, 'period-lbl', t * XS, -1.0, 0));
+
+// ─── Grid lines filling the cube interior ─────────────────────────────────────
+// Arc states are indicated by curve color - see legend in UI
+const gridMaterial = new THREE.LineBasicMaterial({ color: 0x4a3f35, opacity: 0.12, transparent: true });
+const gridLevels = [0, 2.5, 5, 7.5, 10]; // y=0,25,50,75,100 and z=0,25,50,75,100
+
+// Create a grid on every vertical plane (every 500 years)
+for (let t = -10000; t <= 10000; t += 500) {
+  const x = t * XS;
+  
+  // Vertical lines (y-axis) at different z levels
+  gridLevels.forEach(z => {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(x, 0, z),
+      new THREE.Vector3(x, 10, z)
+    ]);
+    scene.add(new THREE.Line(lineGeo, gridMaterial));
+  });
+  
+  // Horizontal lines (z-axis) at different y levels
+  gridLevels.forEach(y => {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(x, y, 0),
+      new THREE.Vector3(x, y, 10)
+    ]);
+    scene.add(new THREE.Line(lineGeo, gridMaterial));
+  });
+}
+
+// Horizontal grid lines spanning the full time range at each y and z level
+// At y levels (capability planes)
+gridLevels.forEach(y => {
+  [0, 2.5, 5, 7.5, 10].forEach(z => {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(T_MIN * XS, y, z),
+      new THREE.Vector3(T_MAX_AXIS * XS, y, z)
+    ]);
+    scene.add(new THREE.Line(lineGeo, gridMaterial));
+  });
+});
+
+// At z levels (governance planes)
+gridLevels.forEach(z => {
+  [0, 2.5, 5, 7.5, 10].forEach(y => {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(T_MIN * XS, y, z),
+      new THREE.Vector3(T_MAX_AXIS * XS, y, z)
+    ]);
+    scene.add(new THREE.Line(lineGeo, gridMaterial));
+  });
+});
+
+// ─── current moment marker ────────────────────────────────────────────────────
+const nowIdx = 2026 - T_MIN;
+const nowPt  = curvePts[nowIdx];
+const dotGeo = new THREE.SphereGeometry(0.1, 16, 16);
+const dot    = new THREE.Mesh(dotGeo, new THREE.MeshBasicMaterial({ color: 0xe1a95e }));
+dot.position.copy(nowPt);
+scene.add(dot);
+lbl('2026', 'era-lbl', nowPt.x + 0.15, nowPt.y + 0.6, nowPt.z);
+
+// ─── bounding box ─────────────────────────────────────────────────────────────
+const bboxGeo   = new THREE.BoxGeometry((T_MAX_AXIS - T_MIN) * XS, 10, 10);
+const bboxEdges = new THREE.LineSegments(
+  new THREE.EdgesGeometry(bboxGeo),
+  new THREE.LineBasicMaterial({ color: 0x4a3f35, opacity: 0.7, transparent: true })
+);
+bboxEdges.position.set(((T_MAX_AXIS + T_MIN) / 2) * XS, 5, 5);
+scene.add(bboxEdges);
+
+// ─── resize ───────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  const w = window.innerWidth, h = window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+  labelRenderer.setSize(w, h);
+});
+
+// ─── render loop ──────────────────────────────────────────────────────────────
+(function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+  labelRenderer.render(scene, camera);
+  })();
+</script>
+
+    <!-- Version Display -->
+    <div id="version-display">Version 26.3.23.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
+</body>
+</html>
