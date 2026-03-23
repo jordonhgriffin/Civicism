@@ -1,3 +1,4 @@
+<!-- v26.3.23.2 — Mobile optimization: collapsible hamburger UI panel, full-width slide-down info panel, touch controls hint, responsive preset grid -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -638,6 +639,77 @@
       color: rgba(225, 169, 94, 0.6);
       font-style: italic;
     }
+
+    /* ── Mobile toggle button ─────────────────────────────────────────────── */
+    #ui-toggle {
+      display: none;
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      z-index: 4000;
+      background: rgba(99,81,71,0.92);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: var(--color-earth-yellow);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      pointer-events: auto;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Mobile styles ────────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      #ui-toggle { display: block; }
+
+      #ui {
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-height: 75vh;
+        border-radius: 0 0 14px 14px;
+        padding: 56px 16px 20px;
+        transform: translateY(-105%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #ui.open {
+        transform: translateY(0);
+      }
+
+      #info-panel {
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-height: 85vh;
+        border-radius: 0 0 14px 14px;
+        transform: translateY(-105%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      #info-panel.active {
+        transform: translateY(0);
+      }
+
+      #version-display {
+        font-size: 0.7rem;
+        bottom: 6px;
+        right: 8px;
+      }
+
+      .preset-buttons {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .preset-btn {
+        padding: 9px 4px;
+        font-size: 9px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -655,6 +727,8 @@
     <div id="info-loading">Select a document to view</div>
   </div>
 </div>
+
+<button id="ui-toggle" onclick="toggleUI()">&#9776; Menu</button>
 
 <div id="ui">
   <h1>Vortical Progression</h1>
@@ -752,7 +826,8 @@
   </div>
 
   <div class="controls-hint">
-    <strong>Controls:</strong> Drag to rotate · Scroll to zoom · Right-drag to pan<br>
+    <strong>Desktop:</strong> Drag to rotate · Scroll to zoom · Right-drag to pan<br>
+    <strong>Mobile:</strong> One finger rotate · Pinch to zoom · Two fingers pan<br>
     The helix tightens toward the present—this is the vortical convergence.
   </div>
 </div>
@@ -890,6 +965,14 @@ async function loadDocument(filename, title) {
   const content = document.getElementById('info-content');
   const titleEl = document.getElementById('info-title');
 
+  // Close mobile UI panel if open
+  const mobileUI = document.getElementById('ui');
+  const mobileToggle = document.getElementById('ui-toggle');
+  if (mobileUI.classList.contains('open')) {
+    mobileUI.classList.remove('open');
+    mobileToggle.innerHTML = '&#9776; Menu';
+  }
+
   // Show panel
   panel.classList.add('active');
   titleEl.textContent = title;
@@ -916,16 +999,33 @@ function closeInfoPanel() {
   document.getElementById('info-panel').classList.remove('active');
 }
 
+// Toggle mobile UI panel
+function toggleUI() {
+  const ui = document.getElementById('ui');
+  const btn = document.getElementById('ui-toggle');
+  ui.classList.toggle('open');
+  btn.innerHTML = ui.classList.contains('open') ? '&#x2715; Close' : '&#9776; Menu';
+}
+
 // Close panel when clicking outside (on canvas)
 document.addEventListener('click', function(e) {
   const panel = document.getElementById('info-panel');
   const ui = document.getElementById('ui');
+  const toggle = document.getElementById('ui-toggle');
 
-  // If panel is active and click is outside panel and outside UI
+  // Close info panel if click is outside it and outside UI
   if (panel.classList.contains('active') &&
       !panel.contains(e.target) &&
       !ui.contains(e.target)) {
     closeInfoPanel();
+  }
+
+  // Close mobile UI if click is on canvas (outside ui and toggle)
+  if (ui.classList.contains('open') &&
+      !ui.contains(e.target) &&
+      !toggle.contains(e.target)) {
+    ui.classList.remove('open');
+    toggle.innerHTML = '&#9776; Menu';
   }
 });
 
@@ -1320,6 +1420,6 @@ window.addEventListener('resize', () => {
 </script>
 
     <!-- Version Display -->
-    <div id="version-display">Version 26.3.23.1 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
+    <div id="version-display">Version 26.3.23.2 &nbsp;|&nbsp; Made by <a href="https://jordonhgriffin.github.io" target="_blank">JHG</a></div>
 </body>
 </html>
